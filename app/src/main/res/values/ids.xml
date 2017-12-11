@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="too_bar_id" type="id">common_tool_bar</item>
+    <item name="app_bar_id" type="id">common_app_bar</item>
+    <item name="status_bar_id" type="id">common_status_bar</item>
+
+</resources>
