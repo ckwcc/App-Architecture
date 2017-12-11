@@ -1,5 +1,7 @@
 package com.ckw.zfsoft.ckwapparchitecture;
 
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,8 +13,7 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.tv_hello)
-    TextView mHello;
+    private FragmentManager manager;
 
     @Override
     protected int getLayoutId() {
@@ -20,17 +21,21 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView(Bundle savedInstanceState) {
+    public void setToolbar() {
         setDisplayHomeAsUpEnabled(true);
         setToolBarTitle("测试");
         setToolBarSubTitle("嘻嘻");
     }
 
     @Override
-    protected void initData() {
-        mHello.setText("你好");
+    protected void initView(Bundle savedInstanceState) {
+
     }
 
+    @Override
+    protected void handleBundle(@NonNull Bundle bundle) {
+
+    }
 
     @Override
     protected void onResume() {

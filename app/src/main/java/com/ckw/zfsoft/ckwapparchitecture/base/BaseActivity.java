@@ -2,10 +2,12 @@ package com.ckw.zfsoft.ckwapparchitecture.base;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,13 +27,14 @@ import javax.annotation.Nullable;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.support.DaggerAppCompatActivity;
 
 /**
  * Created by ckw
  * on 2017/12/7.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends DaggerAppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
     private Toolbar mToolbar;
 
@@ -50,8 +53,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             initImmersionBar();
         }
         initToolbar();
-        //初始化数据
-        initData();
+
+        setToolbar();
+        //处理从其他界面传过来的数据
+        handleIntent();
         //view与数据绑定
         initView(savedInstanceState);
 
@@ -65,6 +70,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        hideSoftKeyBoard();
     }
 
     @Override
@@ -82,9 +93,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     //////////////////////////////////////////////////////////////////////////////////////////
     //所有的抽象方法
 
-    protected abstract void initData();
-
     protected abstract void initView(Bundle savedInstanceState);
+
+    /**
+     * 处理上个界面传过来的数据---所有的Intent跳转的数据都需要包装在Bundle中
+     *
+     * @param bundle 界面跳转时传递的数据
+     */
+    protected abstract void handleBundle(@NonNull Bundle bundle);
 
     /**
      * this activity layout res
@@ -122,6 +138,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
     }
+
+    public abstract void setToolbar();
 
     /**
      * 设置头部标题
@@ -267,6 +285,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     //其他
+
+    //跳转界面时判读Intent是否携带数据
+    private void handleIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                handleBundle(bundle);
+            }
+        }
+    }
 
 
     public void finish() {

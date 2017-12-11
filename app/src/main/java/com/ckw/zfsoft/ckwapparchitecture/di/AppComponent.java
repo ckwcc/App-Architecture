@@ -1,6 +1,5 @@
 package com.ckw.zfsoft.ckwapparchitecture.di;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
@@ -20,7 +19,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 @Component(modules = {AndroidSupportInjectionModule.class,
                       ActivityBindingModule.class,
-                      ApplicationModule.class
+                      AppModule.class
 })
 public interface AppComponent extends AndroidInjector<CkwApplication> {
 

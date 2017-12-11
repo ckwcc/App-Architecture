@@ -12,10 +12,6 @@
     app:titleTextAppearance="@style/common_toolbar_title"
     app:titleTextColor="@color/colorWhite">
 
-    <!--<ImageView-->
-        <!--android:src="@mipmap/icon_back"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
 
     <TextView
         android:id="@+id/common_title"
