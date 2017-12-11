@@ -5,11 +5,9 @@ package com.ckw.zfsoft.ckwapparchitecture.base;
  * on 2017/12/11.
  */
 
-public interface BaseView<T> {
+public interface BaseView {
     /**
-     * 让view层持有presenter层的引用
-     *
-     * @param presenter 所有的presenter都要继承BasePresenter
+     * 实现Baseview的View在这个方法里初始化presenter
      */
     void initPresenter();
 

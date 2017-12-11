@@ -1,6 +1,8 @@
 package com.ckw.zfsoft.ckwapparchitecture.di;
 
 import com.ckw.zfsoft.ckwapparchitecture.MainActivity;
+import com.ckw.zfsoft.ckwapparchitecture.home.HomeActivity;
+import com.ckw.zfsoft.ckwapparchitecture.home.HomeModule;
 import com.ckw.zfsoft.ckwapparchitecture.login.LoginActivity;
 import com.ckw.zfsoft.ckwapparchitecture.login.LoginModule;
 
@@ -17,4 +19,8 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = LoginModule.class)
     abstract LoginActivity loginActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = HomeModule.class)
+    abstract HomeActivity homeActivity();
 }

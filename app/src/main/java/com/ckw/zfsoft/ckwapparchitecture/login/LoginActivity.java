@@ -25,10 +25,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setDisplayHomeAsUpEnabled(true);
-        setToolBarTitle("登录界面");
-        setToolBarSubTitle("ckw");
-
         LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.rl_login_container);
         if (loginFragment == null) {
             loginFragment = mLoginFragment;
@@ -45,5 +41,23 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected boolean needToolbar() {
+        return true;
+    }
+
+    @Override
+    public void setToolbar() {
+        setDisplayHomeAsUpEnabled(true);
+        setToolBarTitle("登录界面");
+        setToolBarSubTitle("ckw");
+
     }
 }

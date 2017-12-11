@@ -52,13 +52,18 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
         if (isImmersionBarEnabled()){
             initImmersionBar();
         }
-        initToolbar();
 
-        setToolbar();
+        if(needToolbar()){
+            initToolbar();
+            setToolbar();
+        }
+
         //处理从其他界面传过来的数据
         handleIntent();
         //view与数据绑定
         initView(savedInstanceState);
+
+        initListener();
 
         initAnimation();
 
@@ -109,6 +114,8 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
      */
     protected abstract int getLayoutId();
 
+    protected abstract void initListener();
+
     ////////////////////////////////////////////////////////////////////////////////////////
     /**
      * 是否可以使用沉浸式
@@ -133,10 +140,16 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
     /////////////////////////////////////////////////////////////////////////////////////////
     //ToolBar相关
 
+    //返回false的时候，就不再需要重写setToolbar方法，当需要显示toolbar的时候，返回true
+    protected abstract boolean needToolbar();
+
     private void initToolbar(){
         mToolbar =  findViewById(R.id.too_bar_id);
-        mToolbar.setTitle("");
-        setSupportActionBar(mToolbar);
+        if(mToolbar != null){
+            mToolbar.setTitle("");
+            setSupportActionBar(mToolbar);
+        }
+
     }
 
     public abstract void setToolbar();

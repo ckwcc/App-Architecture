@@ -9,7 +9,7 @@ import com.ckw.zfsoft.ckwapparchitecture.base.BaseView;
  */
 
 public class LoginContract {
-    interface View extends BaseView<LoginPresenter>{
+    interface View extends BaseView{
 
         void showLoginSuccess(String msg);
 

@@ -21,6 +21,16 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected boolean needToolbar() {
+        return true;
+    }
+
+    @Override
     public void setToolbar() {
         setDisplayHomeAsUpEnabled(true);
         setToolBarTitle("测试");

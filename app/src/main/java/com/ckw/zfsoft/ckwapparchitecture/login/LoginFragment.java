@@ -38,14 +38,14 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
     }
 
     @Override
-    protected void initVariables() {
-
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.dropView();
+    }
+
+    @Override
+    protected void initVariables() {
+
     }
 
     @Override

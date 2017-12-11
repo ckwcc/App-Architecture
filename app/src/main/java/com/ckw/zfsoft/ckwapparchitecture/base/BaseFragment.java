@@ -18,7 +18,7 @@ import dagger.android.support.DaggerFragment;
  * on 2017/12/7.
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends DaggerFragment implements BaseView<T>{
+public abstract class BaseFragment<T extends BasePresenter> extends DaggerFragment implements BaseView{
     protected Context mContext;
     protected T mPresenter;
 
@@ -69,9 +69,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends DaggerFragme
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-        if(mPresenter != null){
-            mPresenter.dropView();
-        }
 
         if(mImmersionBar != null){
             mImmersionBar.destroy();
