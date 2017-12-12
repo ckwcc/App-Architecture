@@ -2,9 +2,9 @@ package com.ckw.zfsoft.ckwapparchitecture.di;
 
 import android.app.Application;
 import android.content.Context;
-
 import dagger.Binds;
 import dagger.Module;
+
 
 /**
  * This is a Dagger module. We use this to bind our Application class as a Context in the AppComponent
@@ -17,7 +17,8 @@ import dagger.Module;
  */
 @Module
 public abstract class AppModule {
-    //expose Application as an injectable context
+    //expose Application as an injectable context;
+
     @Binds
     abstract Context bindContext(Application application);
 

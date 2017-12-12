@@ -1,10 +1,13 @@
 package com.ckw.zfsoft.ckwapparchitecture.login;
 
+import com.ckw.zfsoft.ckwapparchitecture.NetLoader.HttpManager;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
+import com.ckw.zfsoft.ckwapparchitecture.di.ApiService;
 import com.ckw.zfsoft.ckwapparchitecture.di.FragmentScoped;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 
 /**
@@ -19,6 +22,9 @@ public abstract class LoginModule {
     abstract LoginFragment loginFragment();
 
     @ActivityScoped
-    @Binds
-    abstract LoginContract.Presenter loginPresenter(LoginPresenter loginPresenter);
+    @Provides
+    LoginContract.Presenter loginPresenter(HttpManager httpManager, ApiService apiService){
+        LoginPresenter loginPresenter = new LoginPresenter(httpManager,apiService);
+        return loginPresenter;
+    }
 }
