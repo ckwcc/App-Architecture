@@ -3,6 +3,7 @@ package com.ckw.zfsoft.ckwapparchitecture.di;
 
 import com.ckw.zfsoft.ckwapparchitecture.NetLoader.HttpManager;
 import com.ckw.zfsoft.ckwapparchitecture.common.Config;
+import com.ckw.zfsoft.ckwapparchitecture.NetLoader.ApiService;
 import com.google.gson.Gson;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -30,7 +31,7 @@ public class NetModule {
     @Singleton
     @Provides
     ApiService provideApiService(Retrofit retrofit){
-        return retrofit.create(ApiService.class);
+        return  retrofit.create(ApiService.class);
     }
 
     @Named("base_url")

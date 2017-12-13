@@ -18,7 +18,7 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends BaseFragment<LoginPresenter> implements LoginContract.View{
+public class LoginFragment extends BaseFragment implements LoginContract.View{
 
     @Inject
     public LoginFragment() {
@@ -63,7 +63,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter> implements Login
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.doLogin("ckw","123456");
+                mPresenter.doLogin("110472","wf790102");
             }
         });
     }

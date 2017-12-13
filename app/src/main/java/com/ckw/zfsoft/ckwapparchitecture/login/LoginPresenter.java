@@ -2,9 +2,11 @@ package com.ckw.zfsoft.ckwapparchitecture.login;
 
 import android.util.Log;
 
+import com.ckw.zfsoft.ckwapparchitecture.NetLoader.ApiService;
 import com.ckw.zfsoft.ckwapparchitecture.NetLoader.CallBackListener;
 import com.ckw.zfsoft.ckwapparchitecture.NetLoader.HttpManager;
-import com.ckw.zfsoft.ckwapparchitecture.di.ApiService;
+import com.ckw.zfsoft.ckwapparchitecture.common.Config;
+import com.ckw.zfsoft.ckwapparchitecture.entity.User;
 
 import javax.inject.Inject;
 
@@ -31,10 +33,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void doLogin(String username, String userPwd) {
-        mHttpManager.request(mApiService.getCkwArticleInfo(), mCompositeDisposable, mLoginView,
-                new CallBackListener() {
+        mHttpManager.request(mApiService.login(username,userPwd, Config.STRkEY), mCompositeDisposable, mLoginView,
+                new CallBackListener<User>() {
                     @Override
-                    public void onSuccess(Object data) {
+                    public void onSuccess(User data) {
                         Log.d("----", "onSuccess: 请求成功");
                         mLoginView.showLoginSuccess("登录成功");
                     }
@@ -42,7 +44,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                     @Override
                     public void onError(String errorMsg) {
                         Log.d("----", "onError: 请求失败");
-                        mLoginView.showLoginSuccess(errorMsg);
+                        mLoginView.showLoginFailure(errorMsg);
                     }
                 });
 

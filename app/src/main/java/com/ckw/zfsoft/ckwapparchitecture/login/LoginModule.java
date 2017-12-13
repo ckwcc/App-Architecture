@@ -1,11 +1,10 @@
 package com.ckw.zfsoft.ckwapparchitecture.login;
 
+import com.ckw.zfsoft.ckwapparchitecture.NetLoader.ApiService;
 import com.ckw.zfsoft.ckwapparchitecture.NetLoader.HttpManager;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
-import com.ckw.zfsoft.ckwapparchitecture.di.ApiService;
 import com.ckw.zfsoft.ckwapparchitecture.di.FragmentScoped;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;

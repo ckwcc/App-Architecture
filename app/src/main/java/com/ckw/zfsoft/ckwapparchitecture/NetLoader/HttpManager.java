@@ -1,6 +1,7 @@
 package com.ckw.zfsoft.ckwapparchitecture.NetLoader;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.ckw.zfsoft.ckwapparchitecture.base.BasePresenter;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseView;
@@ -53,6 +54,7 @@ public class HttpManager {
                             return;
                         }
                         int code = response.getCode();
+                        Log.d("----", "onNext: code="+code);
                         T data = response.getData();
                         //TODO 根据具体的业务需求来写
                         switch (code) {
@@ -86,6 +88,7 @@ public class HttpManager {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("----", "onError: 直接没有走onerror方法：");
                         if ( e == null || !view.isActive()) {
                             return;
                         }

@@ -18,9 +18,8 @@ import dagger.android.support.DaggerFragment;
  * on 2017/12/7.
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends DaggerFragment implements BaseView{
+public abstract class BaseFragment extends DaggerFragment implements BaseView{
     protected Context mContext;
-    protected T mPresenter;
 
     protected ImmersionBar mImmersionBar;
 
@@ -74,11 +73,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends DaggerFragme
             mImmersionBar.destroy();
         }
     }
-
-//    @Override
-//    public void setPresenter(T presenter) {
-//        this.mPresenter = presenter;
-//    }
 
     @Override
     public boolean isActive() {

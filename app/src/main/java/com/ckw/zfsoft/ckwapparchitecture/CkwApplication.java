@@ -1,6 +1,5 @@
 package com.ckw.zfsoft.ckwapparchitecture;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.Utils;
 import com.ckw.zfsoft.ckwapparchitecture.di.AppComponent;
 import com.ckw.zfsoft.ckwapparchitecture.di.DaggerAppComponent;

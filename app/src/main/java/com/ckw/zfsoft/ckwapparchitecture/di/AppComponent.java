@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ckw.zfsoft.ckwapparchitecture.CkwApplication;
+import com.ckw.zfsoft.ckwapparchitecture.NetLoader.ApiService;
 import com.ckw.zfsoft.ckwapparchitecture.NetLoader.HttpManager;
 import com.google.gson.Gson;
 
