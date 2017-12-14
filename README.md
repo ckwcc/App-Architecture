@@ -16,3 +16,6 @@
  
 # 4.使用AndroidUtilCode框架
   该第三方框架满足日常app开发的各种工具类，当然也可以将这个框架中的各种工具类copy下来，放在自己的项目中
+  
+# 5.使用统一的风格
+  在基类中，使用统一的toolbar，便于头部管理，可以在继承的Activity中轻松地设置。同时在BaseActivity和BaseFragment中实现沉浸式状态栏，满足不同安卓版本的需求。MVP模式使用统一的Presenter和View。
