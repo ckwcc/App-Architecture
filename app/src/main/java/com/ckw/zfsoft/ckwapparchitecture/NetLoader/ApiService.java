@@ -14,15 +14,5 @@ import retrofit2.http.POST;
  */
 
 public interface ApiService {
-    /**
-     * 登录接口
-     *
-     * @param username 用户名
-     * @param password 密码
-     * @return Response<User>对象
-     */
-    @FormUrlEncoded
-    @POST("zftal-mobile/commonHttp/commonHttp_login.html")
-    Observable<Response<User>> login(@Field("username") String username, @Field("password")
-            String password, @Field("strKey") String strKey);
+
 }

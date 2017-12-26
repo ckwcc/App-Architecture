@@ -2,11 +2,18 @@ package com.ckw.zfsoft.ckwapparchitecture.home;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.MedalFragment;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.HeartFragment;
+import com.ckw.zfsoft.ckwapparchitecture.modules.fourthmodule.FlagFragment;
+import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.CupFragment;
+import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaFragment;
 
 import java.util.ArrayList;
 
@@ -23,10 +30,29 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     @BindView(R.id.ntb)
     NavigationTabBar mNavigationTabBar;
 
+    private int mCurrentIndex = 0;
+    private FragmentManager mFragmentManager;
+    private static final String TAG_HEART_FRAGMENT = "HeartFragment";
+    private static final String TAG_CUP_FRAGMENT = "CupFragment";
+    private static final String TAG_DIPLOMA_FRAGMENT = "DiplomaFragment";
+    private static final String TAG_FLAG_FRAGMENT = "FlagFragment";
+    private static final String TAG_MEDAL_FRAGMENT = "MedalFragment";
+    private HeartFragment mHeartFragment;
+    private CupFragment mCupFragment;
+    private DiplomaFragment mDiplomaFragment;
+    private FlagFragment mFlagFragment;
+    private MedalFragment medalFragment;
+
+
+
     @Override
     protected void initView(Bundle savedInstanceState) {
+        mFragmentManager = getSupportFragmentManager();
         initNavigationTabBar();
+        initSaveInstanceState(savedInstanceState);
     }
+
+
 
     @Override
     protected void handleBundle(@NonNull Bundle bundle) {
@@ -53,6 +79,24 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putInt("currentIndex",mCurrentIndex);
+    }
+
+    private void initSaveInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            mCurrentIndex = savedInstanceState.getInt("currentIndex");
+            mHeartFragment = (HeartFragment) mFragmentManager.findFragmentByTag(TAG_HEART_FRAGMENT);
+            mCupFragment = (CupFragment) mFragmentManager.findFragmentByTag(TAG_CUP_FRAGMENT);
+            mDiplomaFragment = (DiplomaFragment) mFragmentManager.findFragmentByTag(TAG_DIPLOMA_FRAGMENT);
+            mFlagFragment = (FlagFragment) mFragmentManager.findFragmentByTag(TAG_FLAG_FRAGMENT);
+            medalFragment = (MedalFragment) mFragmentManager.findFragmentByTag(TAG_MEDAL_FRAGMENT);
+        }else {
+//            mHeartFragment = HeartFragment.
+        }
+    }
 
     private void initNavigationTabBar() {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
@@ -82,7 +126,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         NavigationTabBar.Model forthModel = new NavigationTabBar.Model.Builder(
                 ContextCompat.getDrawable(this, R.mipmap.ic_fourth),
                 Color.parseColor(colors[3])
-        ).title("Diploma")
+        ).title("Flag")
                 .badgeTitle("icon")
                 .build();
 

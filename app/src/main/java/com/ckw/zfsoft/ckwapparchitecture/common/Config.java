@@ -8,5 +8,4 @@ package com.ckw.zfsoft.ckwapparchitecture.common;
 public class Config {
     public static final boolean DUBUG = true;
     public static final String BASE_URL =  "http://218.3.172.95:8081/";
-    public static final String STRkEY = "WYNn2rNOtkuMGGlPrFSaMB0rQoBUmssS";
 }

@@ -1,15 +1,18 @@
 package com.ckw.zfsoft.ckwapparchitecture.login;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
+import com.ckw.zfsoft.ckwapparchitecture.home.HomeActivity;
 
 import javax.inject.Inject;
 
@@ -27,8 +30,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
     @Inject
     LoginPresenter mPresenter;
 
-    @BindView(R.id.tv_showResult)
-    TextView mShowResult;
+    @BindView(R.id.et_user_name)
+    EditText mUserName;
+    @BindView(R.id.et_user_pwd)
+    EditText mUserPwd;
     @BindView(R.id.tv_login)
     TextView mLogin;
 
@@ -63,19 +68,22 @@ public class LoginFragment extends BaseFragment implements LoginContract.View{
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.doLogin("110472","wf790102");
+                String userName = mUserName.getText().toString().trim();
+                String userPwd = mUserPwd.getText().toString().trim();
+                mPresenter.doLogin(userName,userPwd);
             }
         });
     }
 
     @Override
     public void showLoginSuccess(String msg) {
-        mShowResult.setText("成功："+msg);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public void showLoginFailure(String msg) {
-        mShowResult.setText("失败："+msg);
+
     }
 
 

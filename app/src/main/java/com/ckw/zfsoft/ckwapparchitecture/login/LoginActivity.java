@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity {
     public void setToolbar() {
         setDisplayHomeAsUpEnabled(true);
         setToolBarTitle("登录界面");
-        setToolBarSubTitle("ckw");
+        setToolBarSubTitle("");
 
     }
 }

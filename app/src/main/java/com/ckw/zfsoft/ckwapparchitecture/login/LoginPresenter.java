@@ -33,21 +33,8 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void doLogin(String username, String userPwd) {
-        mHttpManager.request(mApiService.login(username,userPwd, Config.STRkEY), mCompositeDisposable, mLoginView,
-                new CallBackListener<User>() {
-                    @Override
-                    public void onSuccess(User data) {
-                        Log.d("----", "onSuccess: 请求成功");
-                        mLoginView.showLoginSuccess("登录成功");
-                    }
 
-                    @Override
-                    public void onError(String errorMsg) {
-                        Log.d("----", "onError: 请求失败");
-                        mLoginView.showLoginFailure(errorMsg);
-                    }
-                });
-
+        mLoginView.showLoginSuccess("登录成功");
     }
 
     @Override
