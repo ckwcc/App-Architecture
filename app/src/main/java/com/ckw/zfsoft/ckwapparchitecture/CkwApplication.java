@@ -1,8 +1,8 @@
 package com.ckw.zfsoft.ckwapparchitecture;
 
-import com.blankj.utilcode.util.Utils;
 import com.ckw.zfsoft.ckwapparchitecture.di.AppComponent;
 import com.ckw.zfsoft.ckwapparchitecture.di.DaggerAppComponent;
+import com.ckw.zfsoft.ckwapparchitecture.utils.Utils;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;

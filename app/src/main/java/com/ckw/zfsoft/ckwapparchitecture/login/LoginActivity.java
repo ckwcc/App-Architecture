@@ -3,11 +3,10 @@ package com.ckw.zfsoft.ckwapparchitecture.login;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
-import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.FragmentActivityUtils;
 
 import javax.inject.Inject;
 
@@ -28,7 +27,7 @@ public class LoginActivity extends BaseActivity {
         LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.rl_login_container);
         if (loginFragment == null) {
             loginFragment = mLoginFragment;
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),loginFragment,R.id.rl_login_container);
+            FragmentActivityUtils.addFragmentToActivity(getSupportFragmentManager(),loginFragment,R.id.rl_login_container);
 
         }
     }
