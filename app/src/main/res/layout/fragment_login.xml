@@ -1,7 +1,7 @@
-<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/login_root"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,11 +12,11 @@
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
         android:text="@string/user_name"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/et_user_name"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -24,13 +24,16 @@
         android:id="@+id/et_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="185dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_user_name"
+        app:layout_constraintBottom_toTopOf="@+id/et_user_pwd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.293"
-        app:layout_constraintStart_toEndOf="@+id/tv_user_name" />
+        app:layout_constraintStart_toEndOf="@+id/tv_user_name"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_user_pwd"
@@ -46,26 +49,26 @@
     <EditText
         android:id="@+id/et_user_pwd"
         android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:layout_marginBottom="256dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="255dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="numberPassword"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_user_pwd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_user_pwd" />
+        app:layout_constraintStart_toEndOf="@+id/tv_user_pwd"
+        app:layout_constraintTop_toBottomOf="@+id/et_user_name" />
 
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:background="@color/colorAccent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
