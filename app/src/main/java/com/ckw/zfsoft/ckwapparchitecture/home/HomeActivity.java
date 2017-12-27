@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
@@ -14,6 +15,8 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.HeartFragment;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fourthmodule.FlagFragment;
 import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.CupFragment;
 import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaFragment;
+import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.FragmentUtils;
 
 import java.util.ArrayList;
 
@@ -50,6 +53,8 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         mFragmentManager = getSupportFragmentManager();
         initNavigationTabBar();
         initSaveInstanceState(savedInstanceState);
+
+        showFragment(mCurrentIndex);
     }
 
 
@@ -71,12 +76,13 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
 
     @Override
     protected boolean needToolbar() {
-        return false;
+        return true;
     }
 
     @Override
     public void setToolbar() {
-
+        setDisplayHomeAsUpEnabled(true);
+        setToolBarTitle("toolbar");
     }
 
     @Override
@@ -85,17 +91,96 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         outState.putInt("currentIndex",mCurrentIndex);
     }
 
+
+
+    @Override
+    public void onStartTabSelected(NavigationTabBar.Model model, int index) {
+
+    }
+
+    @Override
+    public void onEndTabSelected(NavigationTabBar.Model model, int index) {
+        switch (index){
+            case 0:
+                mCurrentIndex = 0;
+                showFragment(0);
+                break;
+            case 1:
+                mCurrentIndex = 1;
+                showFragment(1);
+                break;
+            case 2:
+                mCurrentIndex = 2;
+                showFragment(2);
+                break;
+            case 3:
+                mCurrentIndex = 3;
+                showFragment(3);
+                break;
+            case 4:
+                mCurrentIndex = 4;
+                showFragment(4);
+                break;
+        }
+    }
+
+    private void showFragment(int currentIndex){
+        mNavigationTabBar.setModelIndex(currentIndex);
+        hideAllFragment();
+        switch (currentIndex){
+            case 0:
+                FragmentUtils.show(mHeartFragment);
+                break;
+            case 1:
+                FragmentUtils.show(mCupFragment);
+                break;
+            case 2:
+                FragmentUtils.show(mDiplomaFragment);
+                break;
+            case 3:
+                FragmentUtils.show(mFlagFragment);
+                break;
+            case 4:
+                FragmentUtils.show(medalFragment);
+                break;
+        }
+
+    }
+
+    private void addAllFragment(){
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        FragmentUtils.add(mFragmentManager,mHeartFragment,R.id.rl_home_container);
+        FragmentUtils.add(mFragmentManager,mCupFragment,R.id.rl_home_container);
+        FragmentUtils.add(mFragmentManager,mDiplomaFragment,R.id.rl_home_container);
+        FragmentUtils.add(mFragmentManager,mFlagFragment,R.id.rl_home_container);
+        FragmentUtils.add(mFragmentManager,medalFragment,R.id.rl_home_container);
+    }
+
+    private void hideAllFragment(){
+        FragmentUtils.hide(mHeartFragment);
+        FragmentUtils.hide(mCupFragment);
+        FragmentUtils.hide(mDiplomaFragment);
+        FragmentUtils.hide(mFlagFragment);
+        FragmentUtils.hide(medalFragment);
+    }
+
     private void initSaveInstanceState(Bundle savedInstanceState) {
         if(savedInstanceState != null){
             mCurrentIndex = savedInstanceState.getInt("currentIndex");
-            mHeartFragment = (HeartFragment) mFragmentManager.findFragmentByTag(TAG_HEART_FRAGMENT);
+            mHeartFragment = (HeartFragment) FragmentUtils.findFragment(mFragmentManager,HeartFragment.class);
             mCupFragment = (CupFragment) mFragmentManager.findFragmentByTag(TAG_CUP_FRAGMENT);
             mDiplomaFragment = (DiplomaFragment) mFragmentManager.findFragmentByTag(TAG_DIPLOMA_FRAGMENT);
             mFlagFragment = (FlagFragment) mFragmentManager.findFragmentByTag(TAG_FLAG_FRAGMENT);
             medalFragment = (MedalFragment) mFragmentManager.findFragmentByTag(TAG_MEDAL_FRAGMENT);
         }else {
-//            mHeartFragment = HeartFragment.
+            mHeartFragment = HeartFragment.newInstance();
+            mCupFragment = CupFragment.newInstance();
+            mDiplomaFragment = DiplomaFragment.newInstance();
+            mFlagFragment = FlagFragment.newInstance();
+            medalFragment = MedalFragment.newInstance();
         }
+
+        addAllFragment();
     }
 
     private void initNavigationTabBar() {
@@ -165,16 +250,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         mNavigationTabBar.setBadgeSize(10);
         mNavigationTabBar.setTitleSize(12);
         //以上的设置都可以在xml中设置
-
-    }
-
-    @Override
-    public void onStartTabSelected(NavigationTabBar.Model model, int index) {
-
-    }
-
-    @Override
-    public void onEndTabSelected(NavigationTabBar.Model model, int index) {
 
     }
 }
