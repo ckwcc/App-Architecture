@@ -20,14 +20,6 @@ public class MedalFragment extends BaseFragment {
     public MedalFragment() {
     }
 
-    public static MedalFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        MedalFragment fragment = new MedalFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void initPresenter() {

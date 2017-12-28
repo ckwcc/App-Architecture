@@ -60,6 +60,12 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //theme skin
+    compile 'skin.support:skin-support:2.2.3'                   // skin-support 基础控件支持
+    compile 'skin.support:skin-support-design:2.2.3'// skin-support-design material design 控件支持[可选]
+    compile 'skin.support:skin-support-cardview:2.2.3'// skin-support-cardview CardView 控件支持[可选]
+    compile 'skin.support:skin-support-constraint-layout:2.2.3'// skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }
 repositories {
     mavenCentral()

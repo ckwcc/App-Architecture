@@ -20,15 +20,6 @@ public class DiplomaFragment extends BaseFragment {
     public DiplomaFragment(){
 
     }
-
-    public static DiplomaFragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        DiplomaFragment fragment = new DiplomaFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
     
     @Override
     public void initPresenter() {

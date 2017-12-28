@@ -20,14 +20,6 @@ public class FlagFragment extends BaseFragment {
     public FlagFragment(){
 
     }
-    public static FlagFragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        FlagFragment fragment = new FlagFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
     
     @Override
     public void initPresenter() {

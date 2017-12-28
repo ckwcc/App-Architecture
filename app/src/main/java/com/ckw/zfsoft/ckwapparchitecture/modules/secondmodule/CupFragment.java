@@ -12,23 +12,15 @@ import javax.inject.Inject;
 /**
  * Created by ckw
  * on 2017/12/27.
+ * 使用数据库
  */
 @ActivityScoped
 public class CupFragment extends BaseFragment {
 
     @Inject
     public CupFragment(){
-
     }
 
-    public static CupFragment newInstance() {
-        
-        Bundle args = new Bundle();
-        
-        CupFragment fragment = new CupFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
     
     @Override
     public void initPresenter() {

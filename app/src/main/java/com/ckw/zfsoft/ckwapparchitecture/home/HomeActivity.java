@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
@@ -17,11 +19,18 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.CupFragment;
 import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaFragment;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.FragmentUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.LogUtils;
+import com.gyf.barlibrary.BarHide;
+import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.barlibrary.OnKeyboardListener;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import devlight.io.library.ntb.NavigationTabBar;
+import skin.support.SkinCompatManager;
 
 /**
  * Created by ckw
@@ -32,6 +41,17 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
 
     @BindView(R.id.ntb)
     NavigationTabBar mNavigationTabBar;
+
+    @Inject
+    HeartFragment getHeartFragment;
+    @Inject
+    CupFragment getCupFragment;
+    @Inject
+    DiplomaFragment getDiplomaFragment;
+    @Inject
+    FlagFragment getFlagFragment;
+    @Inject
+    MedalFragment getMedalFragment;
 
     private int mCurrentIndex = 0;
     private FragmentManager mFragmentManager;
@@ -173,11 +193,12 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
             mFlagFragment = (FlagFragment) mFragmentManager.findFragmentByTag(TAG_FLAG_FRAGMENT);
             medalFragment = (MedalFragment) mFragmentManager.findFragmentByTag(TAG_MEDAL_FRAGMENT);
         }else {
-            mHeartFragment = HeartFragment.newInstance();
-            mCupFragment = CupFragment.newInstance();
-            mDiplomaFragment = DiplomaFragment.newInstance();
-            mFlagFragment = FlagFragment.newInstance();
-            medalFragment = MedalFragment.newInstance();
+            mHeartFragment = getHeartFragment;
+            mHeartFragment.setModeListener(modeChooseListener);
+            mDiplomaFragment = getDiplomaFragment;
+            mCupFragment = getCupFragment;
+            mFlagFragment = getFlagFragment;
+            medalFragment = getMedalFragment;
         }
 
         addAllFragment();
@@ -252,4 +273,32 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         //以上的设置都可以在xml中设置
 
     }
+
+
+    private View.OnClickListener modeChooseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_night:
+                    SkinCompatManager.getInstance().loadSkin("night.skin", new SkinCompatManager.SkinLoaderListener() {
+                        @Override
+                        public void onStart() {
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            //这里是切换成功后的回调，可以做一些自己想要的设置
+                        }
+
+                        @Override
+                        public void onFailed(String s) {
+                        }
+                    });
+                    break;
+                case R.id.btn_normal:
+                    SkinCompatManager.getInstance().restoreDefaultTheme();
+                    break;
+            }
+        }
+    };
 }

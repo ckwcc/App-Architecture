@@ -133,7 +133,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
         //为了解决状态栏与布局顶部重叠
         mImmersionBar
                 .fitsSystemWindows(true)  //使用该属性,必须指定状态栏颜色
-                .statusBarColor(R.color.colorPrimary)//这里的颜色需要与base_toolbar的xml中设置的toolbar的颜色一致
+                .statusBarColor(R.color.colorPrimary)//这里的颜色需要与common_toolbar的xml中设置的toolbar的颜色一致
                 .init();
     }
 

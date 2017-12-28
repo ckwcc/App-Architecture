@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
 import com.ckw.zfsoft.ckwapparchitecture.utils.FragmentActivityUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.subutils.SPUtils;
 
 import javax.inject.Inject;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+
         LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.rl_login_container);
         if (loginFragment == null) {
             loginFragment = mLoginFragment;

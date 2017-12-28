@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--头部状态栏颜色-->
     <color name="colorPrimary">#3F51B5</color>
+    <!--toolbar和底部导航栏的文字颜色-->
+    <color name="colorWhite">#ffffff</color>
+    <!--统一的文字颜色-->
+    <color name="colorText">#000000</color>
+    <!--统一的背景颜色-->
+    <color name="colorGray">#cccccc</color>
+
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorGray">#cccccc</color>
+
 </resources>
