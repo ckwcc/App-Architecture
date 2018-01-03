@@ -38,20 +38,20 @@ dependencies {
     compile "com.google.dagger:dagger-android-support:2.11"
     annotationProcessor "com.google.dagger:dagger-android-processor:2.11"
 
-    //status bar (ImmersionBar)
+    //status bar (ImmersionBar) 沉浸式状态栏
     compile "com.gyf.barlibrary:barlibrary:2.3.0"
 
-    //butterknife
+    //butterKnife
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.jakewharton:butterknife:8.8.1'
 
-    //navigationtabbar
+    //navigationTabBar 底部导航栏
     compile 'devlight.io:navigationtabbar:1.2.5'
 
-    //AndroidUtilCode  https://github.com/Blankj/AndroidUtilCode
+    //AndroidUtilCode  https://github.com/Blankj/AndroidUtilCode 工具类
 //    compile 'com.blankj:utilcode:1.9.11'
 
-    //network retrofit+rxjava+okhttp
+    //network retrofit+rxjava+okhttp 网络请求相关
     compile "com.squareup.retrofit2:retrofit:2.3.0"
     compile "com.squareup.retrofit2:converter-gson:2.3.0"
     compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
@@ -61,11 +61,19 @@ dependencies {
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //theme skin
+    //theme skin 主题换肤
     compile 'skin.support:skin-support:2.2.3'                   // skin-support 基础控件支持
     compile 'skin.support:skin-support-design:2.2.3'// skin-support-design material design 控件支持[可选]
     compile 'skin.support:skin-support-cardview:2.2.3'// skin-support-cardview CardView 控件支持[可选]
     compile 'skin.support:skin-support-constraint-layout:2.2.3'// skin-support-constraint-layout ConstraintLayout 控件支持[可选]
+
+    //android权限管理
+    implementation 'pub.devrel:easypermissions:1.1.1'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+    compile 'jp.wasabeef:glide-transformations:3.0.1'
 }
 repositories {
     mavenCentral()

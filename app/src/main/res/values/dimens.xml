@@ -11,5 +11,8 @@
     <dimen name="common_margin_right">16dp</dimen>
     <dimen name="common_padding_top">8dp</dimen>
     <dimen name="common_padding_bottom">8dp</dimen>
+    <dimen name="common_view_height">1dp</dimen>
+    <dimen name="mine_fragment_bottom_sheet_item_height">48dp</dimen>
+    <dimen name="circle_image_view_size">76dp</dimen>
 
 </resources>

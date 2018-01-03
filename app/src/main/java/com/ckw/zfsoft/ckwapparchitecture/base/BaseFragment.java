@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.gyf.barlibrary.ImmersionBar;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerFragment;
+import pub.devrel.easypermissions.AppSettingsDialog;
 
 /**
  * Created by ckw
@@ -22,6 +24,7 @@ public abstract class BaseFragment extends DaggerFragment implements BaseView{
     protected Context mContext;
 
     protected ImmersionBar mImmersionBar;
+    protected AppSettingsDialog mAppSettingsDialog;
 
     private Unbinder mUnbinder;
 
@@ -124,6 +127,25 @@ public abstract class BaseFragment extends DaggerFragment implements BaseView{
      */
     protected boolean immersionEnabled() {
         return false;
+    }
+
+    /**
+     * 显示appSettingsDialog对话框
+     */
+    protected void showAppSettingDialog() {
+        if (!isActive()) {
+            return;
+        }
+        if (mAppSettingsDialog == null) {
+            mAppSettingsDialog = new AppSettingsDialog
+                    .Builder(this)
+                    .setTitle(R.string.request_permissions)
+                    .setRationale(R.string.permissions_rationale)
+                    .setPositiveButton(R.string.Ok)
+                    .setNegativeButton(R.string.cancel)
+                    .build();
+        }
+        mAppSettingsDialog.show();
     }
 
 

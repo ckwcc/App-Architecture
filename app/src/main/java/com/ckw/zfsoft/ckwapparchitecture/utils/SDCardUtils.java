@@ -1,9 +1,11 @@
 package com.ckw.zfsoft.ckwapparchitecture.utils;
 
 import android.content.Context;
+import android.os.Environment;
 import android.os.storage.StorageManager;
 
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -90,5 +92,17 @@ public final class SDCardUtils {
             e.printStackTrace();
         }
         return paths;
+    }
+
+    /**
+     * 获取SD卡路径
+     *
+     * @return SD卡路径
+     */
+    public static String getSDCardPath() {
+        if (!isSDCardEnable()) {
+            return null;
+        }
+        return Environment.getExternalStorageDirectory().getPath() + File.separator;
     }
 }
