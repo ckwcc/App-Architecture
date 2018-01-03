@@ -19,3 +19,12 @@
   
 # 5.使用统一的风格
   在基类中，使用统一的toolbar，便于头部管理，可以在继承的Activity中轻松地设置。同时在BaseActivity和BaseFragment中实现沉浸式状态栏，满足不同安卓版本的需求。MVP模式使用统一的Presenter和View。
+
+# 6.使用统一的bottomSheetDialogFragment
+  通过实现基类，轻松实现自定义从底部弹出的Dialog
+  
+# 7.权限申请
+  几行代码搞定各种权限申请，适配 Android M
+  
+ # 8.主题换肤
+  一键实现主题换肤功能
