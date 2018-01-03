@@ -34,11 +34,16 @@ import com.ckw.zfsoft.ckwapparchitecture.utils.LogUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.SDCardUtils;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -128,6 +133,16 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     @Override
     public void showLoginFailure(String msg) {
 
+    }
+
+    @Override
+    public void updateUserImgSuccess(String msg) {
+        LogUtils.d("上传头像成功");
+    }
+
+    @Override
+    public void updateUserImgFailure(String msg) {
+        LogUtils.d("上传头像失败");
     }
 
 
@@ -254,6 +269,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
 
     private void showIcon(String path){
         ImageLoaderHelper.loadImage(getContext(),mUserImg,path);
+        mPresenter.updateUserImg(buildParams(),getFilePart("ckw",mFile,mFile.getName()));
     }
 
     private void openActivityForPicture(){
@@ -309,5 +325,24 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mFile));
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, REQUEST_CODE_CROP_IMAGE);
+    }
+
+    /**
+     * 上传图片的参数
+     * @return
+     */
+    private Map<String, RequestBody> buildParams(){
+        Map<String,RequestBody> map = new LinkedHashMap<>();
+        map.put("username",getRequestBody("ckw"));
+        return map;
+    }
+
+    private RequestBody getRequestBody(String value){
+        return RequestBody.create(MediaType.parse("multipart/form-data"), value);
+    }
+
+    private MultipartBody.Part getFilePart(String partName, File file, String fileName){
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        return MultipartBody.Part.createFormData(partName, fileName, requestBody);
     }
 }

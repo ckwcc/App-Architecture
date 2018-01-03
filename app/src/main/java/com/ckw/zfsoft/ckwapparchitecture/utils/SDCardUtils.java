@@ -72,7 +72,7 @@ public final class SDCardUtils {
     /**
      * 获取 SD 卡路径
      *
-     * @return SD 卡路径
+     * @return SD 卡路径 这个方法获得的路径左右会有[],所以有点问题
      */
     @SuppressWarnings("TryWithIdenticalCatches")
     public static List<String> getSDCardPaths() {

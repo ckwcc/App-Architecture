@@ -8,9 +8,13 @@ import com.ckw.zfsoft.ckwapparchitecture.NetLoader.HttpManager;
 import com.ckw.zfsoft.ckwapparchitecture.common.Config;
 import com.ckw.zfsoft.ckwapparchitecture.entity.User;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * Created by ckw
@@ -35,6 +39,22 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void doLogin(String username, String userPwd) {
 
         mLoginView.showLoginSuccess("登录成功");
+    }
+
+    @Override
+    public void updateUserImg(Map<String, RequestBody> map, MultipartBody.Part file) {
+        mHttpManager.request(mApiService.updateUserImg(map, file), mCompositeDisposable,
+                mLoginView, new CallBackListener<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        mLoginView.updateUserImgSuccess(data);
+                    }
+
+                    @Override
+                    public void onError(String errorMsg) {
+                        mLoginView.updateUserImgFailure(errorMsg);
+                    }
+                });
     }
 
     @Override
