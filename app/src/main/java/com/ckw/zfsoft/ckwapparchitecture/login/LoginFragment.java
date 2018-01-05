@@ -3,9 +3,11 @@ package com.ckw.zfsoft.ckwapparchitecture.login;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -91,6 +93,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     @Override
     protected void initVariables() {
         mPackageName = AppUtils.getAppName();
+        Log.d("----", "initVariables: packName:"+mPackageName);
     }
 
     @Override
@@ -289,7 +292,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
             LogUtils.d("sd卡为空");
             return null;
         }
-        String take_picture_dir = SDCardUtils.getSDCardPath() + mPackageName + "/camera/";
+        String take_picture_dir = SDCardUtils.getSDCardPath() + mPackageName + "/images/";
         if (!FileUtils.createOrExistsDir(take_picture_dir)) {
             LogUtils.d("目录创建失败");
             return null;
@@ -310,7 +313,9 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     private void cropImage(File cropFile){
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(getContext(),mAuthority , cropFile);
+//            uri = FileProvider.getUriForFile(getContext(),mAuthority , cropFile);
+            uri = getImageContentUri(cropFile.getAbsolutePath());//适配7.0
+            Log.d("----", "cropImage: 图片网址："+uri);
         } else {
             uri = Uri.fromFile(cropFile);
         }
@@ -325,6 +330,27 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mFile));
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivityForResult(intent, REQUEST_CODE_CROP_IMAGE);
+    }
+
+    /**
+     * 适配7.0权限方法
+     * @param path
+     * @return
+     */
+    private Uri getImageContentUri(String path){
+        Cursor cursor = getContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[]{MediaStore.Images.Media._ID},
+                MediaStore.Images.Media.DATA + "=? ",
+                new String[]{path}, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, ""+id);
+        }else {
+            ContentValues contentValues = new ContentValues(1);
+            contentValues.put(MediaStore.Images.Media.DATA, path);
+            return getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+        }
     }
 
     /**

@@ -145,7 +145,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     }
 
     private void showFragment(int currentIndex){
-        mNavigationTabBar.setModelIndex(currentIndex);
         hideAllFragment();
         switch (currentIndex){
             case 0:
