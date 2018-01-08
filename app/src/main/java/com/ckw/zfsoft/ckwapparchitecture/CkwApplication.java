@@ -4,6 +4,7 @@ import com.ckw.zfsoft.ckwapparchitecture.di.AppComponent;
 import com.ckw.zfsoft.ckwapparchitecture.di.DaggerAppComponent;
 import com.ckw.zfsoft.ckwapparchitecture.utils.Utils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.subutils.SPUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
@@ -34,6 +35,13 @@ public class CkwApplication extends DaggerApplication {
         //主题换肤 目前不支持状态栏换肤，所以也就一般般
         SkinCompatManager.withoutActivity(this).loadSkin();
         SPUtils.init(this);
+
+        //检测内存泄漏的工具
+        if(LeakCanary.isInAnalyzerProcess(this)){
+            return;
+        }else {
+            LeakCanary.install(this);
+        }
 
     }
 }

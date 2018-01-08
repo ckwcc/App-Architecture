@@ -30,6 +30,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
 
+    //https://github.com/square/leakcanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
     // Dagger dependencies
     annotationProcessor "com.google.dagger:dagger-compiler:2.11"
     provided 'org.glassfish:javax.annotation:10.0-b28'
