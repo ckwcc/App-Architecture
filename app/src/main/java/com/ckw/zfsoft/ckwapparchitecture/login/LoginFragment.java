@@ -93,7 +93,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     @Override
     protected void initVariables() {
         mPackageName = AppUtils.getAppName();
-        Log.d("----", "initVariables: packName:"+mPackageName);
     }
 
     @Override

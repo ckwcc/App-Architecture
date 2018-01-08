@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
+import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.MedalFragment;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.HeartFragment;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fourthmodule.FlagFragment;
@@ -23,6 +24,10 @@ import com.ckw.zfsoft.ckwapparchitecture.utils.LogUtils;
 import com.gyf.barlibrary.BarHide;
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OnKeyboardListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -71,13 +76,23 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     @Override
     protected void initView(Bundle savedInstanceState) {
         mFragmentManager = getSupportFragmentManager();
-        initNavigationTabBar();
+        initNavigationTabBar(false);
         initSaveInstanceState(savedInstanceState);
 
         showFragment(mCurrentIndex);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     protected void handleBundle(@NonNull Bundle bundle) {
@@ -203,9 +218,11 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         addAllFragment();
     }
 
-    private void initNavigationTabBar() {
+    private void initNavigationTabBar(boolean isNight) {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         String[] colors = getResources().getStringArray(R.array.default_preview);
+
+
 
         NavigationTabBar.Model firstModel = new NavigationTabBar.Model.Builder(
                 ContextCompat.getDrawable(this, R.mipmap.ic_first),
@@ -213,6 +230,15 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         ).title("Heart")
                 .badgeTitle("NTB")
                 .build();
+
+        if(isNight){
+            firstModel = new NavigationTabBar.Model.Builder(
+                    ContextCompat.getDrawable(this, R.mipmap.ic_second),
+                    Color.parseColor(colors[0])
+            ).title("Night")
+                    .badgeTitle("NTB")
+                    .build();
+        }
 
         NavigationTabBar.Model secondModel = new NavigationTabBar.Model.Builder(
                 ContextCompat.getDrawable(this, R.mipmap.ic_second),
@@ -287,6 +313,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
                         @Override
                         public void onSuccess() {
                             //这里是切换成功后的回调，可以做一些自己想要的设置
+                            EventBus.getDefault().post(new NightMessageEvent(true));
                         }
 
                         @Override
@@ -296,8 +323,16 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
                     break;
                 case R.id.btn_normal:
                     SkinCompatManager.getInstance().restoreDefaultTheme();
+                    EventBus.getDefault().post(new NightMessageEvent(false));
                     break;
             }
         }
     };
+
+    @Subscribe(threadMode = ThreadMode.POSTING)
+    public void onNightEvent(NightMessageEvent nightMessageEvent){
+        boolean night = nightMessageEvent.isNight();
+        initNavigationTabBar(night);
+
+    }
 }
