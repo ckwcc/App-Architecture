@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -71,10 +72,9 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     private FlagFragment mFlagFragment;
     private MedalFragment medalFragment;
 
-
-
     @Override
     protected void initView(Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         mFragmentManager = getSupportFragmentManager();
         initNavigationTabBar(false);
         initSaveInstanceState(savedInstanceState);
@@ -85,7 +85,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -117,7 +117,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     @Override
     public void setToolbar() {
         setDisplayHomeAsUpEnabled(true);
-        setToolBarTitle("toolbar");
+
     }
 
     @Override
@@ -163,18 +163,23 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         hideAllFragment();
         switch (currentIndex){
             case 0:
+                setToolBarTitle("heart");
                 FragmentUtils.show(mHeartFragment);
                 break;
             case 1:
+                setToolBarTitle("cup");
                 FragmentUtils.show(mCupFragment);
                 break;
             case 2:
+                setToolBarTitle("diploma");
                 FragmentUtils.show(mDiplomaFragment);
                 break;
             case 3:
+                setToolBarTitle("flag");
                 FragmentUtils.show(mFlagFragment);
                 break;
             case 4:
+                setToolBarTitle("medal");
                 FragmentUtils.show(medalFragment);
                 break;
         }
@@ -221,7 +226,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     private void initNavigationTabBar(boolean isNight) {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         String[] colors = getResources().getStringArray(R.array.default_preview);
-
 
 
         NavigationTabBar.Model firstModel = new NavigationTabBar.Model.Builder(
@@ -276,7 +280,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
 
         //需要调用showBadge方法才会使badge显示
         fifthModel.showBadge();
-
         mNavigationTabBar.setModels(models);
         mNavigationTabBar.setModelIndex(0);//需要在setModels方法后设置才有效
         //当被选中时才显示title

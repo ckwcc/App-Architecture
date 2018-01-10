@@ -81,8 +81,17 @@ dependencies {
 
     //EventBus
     compile 'org.greenrobot:eventbus:3.1.1'
+
+    //photoView
+    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+
+    //EasyRecyclerView
+    compile 'com.jude:easyrecyclerview:4.4.2'
 }
 repositories {
     mavenCentral()
+
+    jcenter()
+    maven { url "https://jitpack.io" }
 }
 

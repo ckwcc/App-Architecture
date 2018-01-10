@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
@@ -7,7 +7,8 @@
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 

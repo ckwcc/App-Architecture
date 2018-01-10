@@ -154,6 +154,10 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
 
     public abstract void setToolbar();
 
+    public Toolbar getToolbar(){
+        return mToolbar;
+    }
+
     /**
      * 设置头部标题
      * @param title

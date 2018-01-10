@@ -1,10 +1,10 @@
 package com.ckw.zfsoft.ckwapparchitecture.di;
 
-import com.ckw.zfsoft.ckwapparchitecture.MainActivity;
 import com.ckw.zfsoft.ckwapparchitecture.home.HomeActivity;
 import com.ckw.zfsoft.ckwapparchitecture.home.HomeModule;
 import com.ckw.zfsoft.ckwapparchitecture.login.LoginActivity;
 import com.ckw.zfsoft.ckwapparchitecture.login.LoginModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.photo_view.BigPictureActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -23,4 +23,5 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = HomeModule.class)
     abstract HomeActivity homeActivity();
+
 }
