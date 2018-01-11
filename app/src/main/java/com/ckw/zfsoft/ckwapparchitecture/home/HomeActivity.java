@@ -117,7 +117,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
     @Override
     public void setToolbar() {
         setDisplayHomeAsUpEnabled(true);
-
+        setToolBarSubTitle("");
     }
 
     @Override

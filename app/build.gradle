@@ -33,6 +33,7 @@ dependencies {
     //https://github.com/square/leakcanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
 
     // Dagger dependencies
     annotationProcessor "com.google.dagger:dagger-compiler:2.11"
@@ -87,6 +88,9 @@ dependencies {
 
     //EasyRecyclerView
     compile 'com.jude:easyrecyclerview:4.4.2'
+    //SmartRefreshLayout
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'//没有使用特殊Header，可以不加这行
 }
 repositories {
     mavenCentral()
