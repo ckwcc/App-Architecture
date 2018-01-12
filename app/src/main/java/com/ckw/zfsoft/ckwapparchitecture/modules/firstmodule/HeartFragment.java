@@ -55,7 +55,7 @@ public class HeartFragment extends BaseFragment {
     }
 
     @Override
-    protected void initViews(View view) {
+    protected void operateViews(View view) {
 
     }
 

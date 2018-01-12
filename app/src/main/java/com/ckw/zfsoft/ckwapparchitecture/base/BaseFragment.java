@@ -62,7 +62,7 @@ public abstract class BaseFragment extends DaggerFragment implements BaseView{
         if(immersionEnabled()){
             initImmersionBar();
         }
-        initViews(view);
+        operateViews(view);
         initListener();
     }
 
@@ -104,7 +104,7 @@ public abstract class BaseFragment extends DaggerFragment implements BaseView{
      *
      * @param view 布局文件的跟布局
      */
-    protected abstract void initViews(View view);
+    protected abstract void operateViews(View view);
 
     /**
      * 初始化点击事件

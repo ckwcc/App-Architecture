@@ -4,36 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        <com.scwang.smartrefresh.header.DropboxHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="@android:color/white"
-            app:srlPrimaryColor="@color/colorPrimary"
-            app:srlTextSizeTitle="16sp"
-            app:srlTextSizeTime="10dp"
-            app:srlTextTimeMarginTop="2dp"
-            app:srlEnableLastTime="true"
-            app:srlFinishDuration="500"
-            app:srlDrawableSize="20dp"
-            app:srlDrawableArrowSize="20dp"
-            app:srlDrawableProgressSize="20dp"
-            app:srlDrawableMarginRight="20dp"
-            app:srlClassicsSpinnerStyle="Translate"/>
+            android:layout_height="wrap_content" />
 
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recyclerView"
+            app:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
             android:background="#fff" />
 
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.scwang.smartrefresh.layout.footer.ClassicsFooter>
 
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        app:useCompatPadding="true"
+        android:src="@mipmap/ic_star"
+        app:fab_colorNormal="@color/colorGreen"
+        app:fab_colorPressed="@color/colorPrimaryDark"
+        app:fab_colorRipple="@color/colorAccent"/>
+
+
+
 
 </RelativeLayout>

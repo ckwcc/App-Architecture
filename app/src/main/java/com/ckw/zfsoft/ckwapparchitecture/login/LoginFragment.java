@@ -101,7 +101,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     }
 
     @Override
-    protected void initViews(View view) {
+    protected void operateViews(View view) {
 
     }
 

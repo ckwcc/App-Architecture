@@ -9,6 +9,8 @@
     <!--统一的背景颜色-->
     <color name="colorGray">#cccccc</color>
 
+    <color name="colorGreen">#09e740</color>
+
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 

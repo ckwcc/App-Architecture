@@ -91,6 +91,8 @@ dependencies {
     //SmartRefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'//没有使用特殊Header，可以不加这行
+    //FloatingActionBar
+    compile 'com.github.clans:fab:1.6.4'
 }
 repositories {
     mavenCentral()

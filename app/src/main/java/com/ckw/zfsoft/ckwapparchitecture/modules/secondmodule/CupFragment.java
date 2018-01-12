@@ -74,7 +74,7 @@ public class CupFragment extends BaseFragment {
 
 
     @Override
-    protected void initViews(View view) {
+    protected void operateViews(View view) {
 
     }
 
