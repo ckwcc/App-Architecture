@@ -14,13 +14,16 @@
 # 3.使用Butterknife绑定控件
   彻底告别findviewbyid，使用注解就可以完成View的查找，简化了代码的书写
  
-# 4.使用AndroidUtilCode框架
-  该第三方框架满足日常app开发的各种工具类，当然也可以将这个框架中的各种工具类copy下来，放在自己的项目中
+# 4.丰富的工具类
+  使用AndroidUtilCode框架，该第三方框架满足日常app开发的各种工具类，当然也可以将这个框架中的各种工具类copy下来，放在自己的项目中
   
 # 5.使用统一的风格
   在基类中，使用统一的toolbar，便于头部管理，可以在继承的Activity中轻松地设置。同时在BaseActivity和BaseFragment中实现沉浸式状态栏，满足不同安卓版本的需求。MVP模式使用统一的Presenter和View。
   使用统一的bottomSheetDialogFragment
   通过实现基类，轻松实现自定义从底部弹出的Dialog
+  
+# 6.数据展示
+  集成第三方框架，轻松实现各种酷炫的刷新头，刷新尾。
   
 # 7.权限申请
   几行代码搞定各种权限申请，适配 Android M
