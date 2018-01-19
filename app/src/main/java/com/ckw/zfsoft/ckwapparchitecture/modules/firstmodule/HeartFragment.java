@@ -16,7 +16,7 @@ import butterknife.BindView;
 /**
  * Created by ckw
  * on 2017/12/27.
- * 这个界面打算做Android的换肤功能
+ * Android的换肤功能
  */
 @ActivityScoped
 public class HeartFragment extends BaseFragment {

@@ -1,5 +1,6 @@
 package com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,8 +14,12 @@ import android.view.animation.AnimationUtils;
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
+import com.ckw.zfsoft.ckwapparchitecture.utils.SizeUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.ToastUtils;
 import com.github.clans.fab.FloatingActionButton;
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -32,6 +37,7 @@ import uk.co.senab.photoview.log.LoggerDefault;
 /**
  * Created by ckw
  * on 2017/12/27.
+ * 列表数据显示
  */
 @ActivityScoped
 public class DiplomaFragment extends BaseFragment {
@@ -73,6 +79,7 @@ public class DiplomaFragment extends BaseFragment {
 
     }
 
+
     @Override
     protected void handleBundle(Bundle bundle) {
 
@@ -80,7 +87,10 @@ public class DiplomaFragment extends BaseFragment {
 
     @Override
     protected void operateViews(View view) {
-
+        DividerDecoration itemDecoration = new DividerDecoration(Color.GRAY, SizeUtils.dp2px(0.5f), SizeUtils.dp2px(0),0);//color & height & paddingLeft & paddingRight
+        itemDecoration.setDrawLastItem(true);//sometimes you don't want draw the divider for the last item,default is true.
+        itemDecoration.setDrawHeaderFooter(false);//whether draw divider for header and footer,default is false.
+        mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
@@ -98,10 +108,23 @@ public class DiplomaFragment extends BaseFragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initListener() {
+
+        mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                ToastUtils.showShort("position:"+position);
+            }
+        });
         mSmartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(1500);
+            public void onRefresh(final RefreshLayout refreshlayout) {
+                refreshlayout.getLayout().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showShort("刷新成功");
+                        refreshlayout.finishRefresh();
+                    }
+                },1500);
             }
 
             @Override
@@ -109,7 +132,7 @@ public class DiplomaFragment extends BaseFragment {
                 refreshlayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        for (int i = 0; i < 3; i++) {
+                        for (int i = 0; i < 5; i++) {
                             mData.add("第"+mCount+"次刷新的数据："+i);
                         }
                         mCount++;

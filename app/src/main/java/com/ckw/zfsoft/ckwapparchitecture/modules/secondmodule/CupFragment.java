@@ -24,6 +24,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 /**
  * Created by ckw
  * on 2017/12/27.
+ * 图片显示
  */
 @ActivityScoped
 public class CupFragment extends BaseFragment {

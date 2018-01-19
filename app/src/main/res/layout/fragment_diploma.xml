@@ -4,9 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -45,10 +42,8 @@
         app:useCompatPadding="true"
         android:src="@mipmap/ic_star"
         app:fab_colorNormal="@color/colorGreen"
-        app:fab_colorPressed="@color/colorPrimaryDark"
-        app:fab_colorRipple="@color/colorAccent"/>
-
-
+        app:fab_colorPressed="@color/colorGreenPressed"
+        app:fab_colorRipple="@color/colorGreenPressed"/>
 
 
 </RelativeLayout>

@@ -23,5 +23,11 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <!--movie view-->
+    <style name="Widget.PictureInPicture.MovieView" parent="android:Widget">
+        <item name="android:src">@null</item>
+        <item name="android:adjustViewBounds">false</item>
+    </style>
+
 
 </resources>
