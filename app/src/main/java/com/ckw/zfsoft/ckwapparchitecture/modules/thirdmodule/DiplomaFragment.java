@@ -32,7 +32,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import uk.co.senab.photoview.log.LoggerDefault;
 
 /**
  * Created by ckw

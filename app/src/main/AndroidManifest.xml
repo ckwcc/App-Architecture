@@ -28,7 +28,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".home.HomeActivity" />
-
+        <activity android:name=".modules.fifthmodule.ijk.IjkActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/FullscreenTheme"
+            />
+        <activity android:name=".modules.secondmodule.photo_view.BigPictureActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -39,8 +43,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".modules.secondmodule.Main2Activity" />
-        <activity android:name=".modules.secondmodule.photo_view.BigPictureActivity" />
+
     </application>
 
 </manifest>

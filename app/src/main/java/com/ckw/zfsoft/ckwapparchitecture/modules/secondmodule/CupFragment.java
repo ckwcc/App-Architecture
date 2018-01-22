@@ -14,12 +14,12 @@ import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
 import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.photo_view.BigPictureActivity;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ToastUtils;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by ckw
@@ -81,17 +81,7 @@ public class CupFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-        mShow.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
-            @Override
-            public void onPhotoTap(View view, float v, float v1) {
-                translateView(view);
-            }
 
-            @Override
-            public void onOutsidePhotoTap() {
-
-            }
-        });
 
         mOne.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,6 +12,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--视频播放 横屏-->
+    <style name="FullscreenTheme" parent="Theme.AppCompat.NoActionBar">
+    </style>
+
     <!--toolbar的样式-->
     <style name="tool_bar_theme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/colorWhite</item>

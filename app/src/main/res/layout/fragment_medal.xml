@@ -9,4 +9,12 @@
         android:adjustViewBounds="true"
         android:src="@raw/vid_bigbuckbunny"
         android:title="@string/title_bigbuckbunny"/>
+
+    <Button
+        android:id="@+id/btn_ijk"
+        android:text="ijk"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

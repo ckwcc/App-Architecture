@@ -84,7 +84,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.1.1'
 
     //photoView
-    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    compile 'com.github.chrisbanes:PhotoView:2.1.3'
 
     //EasyRecyclerView
     compile 'com.jude:easyrecyclerview:4.4.2'
@@ -93,6 +93,10 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'//没有使用特殊Header，可以不加这行
     //FloatingActionBar
     compile 'com.github.clans:fab:1.6.4'
+
+    //bilibili ijkplayer
+    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.4'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
 }
 repositories {
     mavenCentral()

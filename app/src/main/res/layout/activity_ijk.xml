@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.media.IjkVideoView
+        android:id="@+id/ijk_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.media.IjkVideoView>
+
+</RelativeLayout>
