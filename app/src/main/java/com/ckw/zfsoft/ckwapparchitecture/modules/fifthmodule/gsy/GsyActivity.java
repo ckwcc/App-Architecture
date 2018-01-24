@@ -174,7 +174,7 @@ public class GsyActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (isPlay) {
+        if (isPlay && getCurPlay() != null) {
             getCurPlay().release();
         }
         //GSYPreViewManager.instance().releaseMediaPlayer();
@@ -198,9 +198,14 @@ public class GsyActivity extends BaseActivity {
     }
 
     private GSYVideoPlayer getCurPlay() {
-        if (danmakuVideoPlayer.getFullWindowPlayer() != null) {
-            return  danmakuVideoPlayer.getFullWindowPlayer();
+        if(danmakuVideoPlayer != null){
+            if (danmakuVideoPlayer.getFullWindowPlayer() != null) {
+                return  danmakuVideoPlayer.getFullWindowPlayer();
+            }
+            return danmakuVideoPlayer;
+        }else {
+            return null;
         }
-        return danmakuVideoPlayer;
+
     }
 }

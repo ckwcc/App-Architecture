@@ -114,6 +114,9 @@ dependencies {
 
     //轮播图
     compile 'com.youth.banner:banner:1.4.10'
+
+    //圆形图片
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 }
 repositories {
     mavenCentral()

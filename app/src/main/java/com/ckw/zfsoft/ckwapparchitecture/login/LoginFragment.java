@@ -43,6 +43,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -68,7 +69,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     LoginPresenter mPresenter;
 
     @BindView(R.id.iv_user)
-    ImageView mUserImg;
+    CircleImageView mUserImg;
     @BindView(R.id.et_user_name)
     EditText mUserName;
     @BindView(R.id.et_user_pwd)
@@ -370,4 +371,22 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         return MultipartBody.Part.createFormData(partName, fileName, requestBody);
     }
+
+    @Override
+    protected boolean immersionEnabled() {
+        return true;
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        if (mImmersionBar == null) {
+            return;
+        }
+        mImmersionBar.statusBarDarkFont(true);
+        mImmersionBar.statusBarColor(R.color.colorWhite)
+                .fitsSystemWindows(true)
+                .init();
+    }
+
 }

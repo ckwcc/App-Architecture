@@ -51,14 +51,14 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected boolean needToolbar() {
-        return true;
+        return false;
     }
 
     @Override
     public void setToolbar() {
-        setDisplayHomeAsUpEnabled(true);
-        setToolBarTitle("登录界面");
-        setToolBarSubTitle("");
+//        setDisplayHomeAsUpEnabled(true);
+//        setToolBarTitle("登录界面");
+//        setToolBarSubTitle("");
 
     }
 }
