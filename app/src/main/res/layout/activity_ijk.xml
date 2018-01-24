@@ -3,11 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/common_toolbar"/>
+
     <com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.media.IjkVideoView
         android:id="@+id/ijk_video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.media.IjkVideoView>
+
 
 </RelativeLayout>

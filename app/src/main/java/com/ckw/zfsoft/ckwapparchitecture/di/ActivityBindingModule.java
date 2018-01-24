@@ -4,6 +4,8 @@ import com.ckw.zfsoft.ckwapparchitecture.home.HomeActivity;
 import com.ckw.zfsoft.ckwapparchitecture.home.HomeModule;
 import com.ckw.zfsoft.ckwapparchitecture.login.LoginActivity;
 import com.ckw.zfsoft.ckwapparchitecture.login.LoginModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.photo_view.BigPictureActivity;
@@ -29,5 +31,9 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = IjkModule.class)
     abstract IjkActivity ijkActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = GsyModule.class)
+    abstract GsyActivity gsyActivity();
 
 }

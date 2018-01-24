@@ -16,6 +16,7 @@ import com.ckw.zfsoft.ckwapparchitecture.MainActivity;
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
+import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.IntentUtils;
@@ -38,6 +39,9 @@ public class MedalFragment extends BaseFragment implements View.OnClickListener 
 
     @BindView(R.id.btn_ijk)
     Button mGoIjk;
+
+    @BindView(R.id.btn_gsy_video_player)
+    Button mGoGsy;
 
     @Inject
     public MedalFragment() {
@@ -72,6 +76,7 @@ public class MedalFragment extends BaseFragment implements View.OnClickListener 
     @Override
     protected void initListener() {
         mGoIjk.setOnClickListener(this);
+        mGoGsy.setOnClickListener(this);
     }
 
 
@@ -88,6 +93,9 @@ public class MedalFragment extends BaseFragment implements View.OnClickListener 
         switch (id){
             case R.id.btn_ijk:
                 ActivityUtils.startActivity(getActivity(), IjkActivity.class);
+                break;
+            case R.id.btn_gsy_video_player:
+                ActivityUtils.startActivity(getActivity(), GsyActivity.class);
                 break;
         }
     }

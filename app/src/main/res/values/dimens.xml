@@ -15,4 +15,6 @@
     <dimen name="mine_fragment_bottom_sheet_item_height">48dp</dimen>
     <dimen name="circle_image_view_size">76dp</dimen>
 
+    <dimen name="post_media_height">200dp</dimen>
+
 </resources>
