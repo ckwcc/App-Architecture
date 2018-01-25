@@ -1,6 +1,7 @@
 package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -12,15 +13,18 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
 import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
-import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaAdapter;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
@@ -49,8 +53,7 @@ import skin.support.SkinCompatManager;
  * Android的换肤功能
  */
 @ActivityScoped
-public class HeartFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks{
-    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+public class HeartFragment extends BaseFragment {
 
     @BindView(R.id.banner)
     Banner mBanner;
@@ -147,32 +150,9 @@ public class HeartFragment extends BaseFragment implements EasyPermissions.Permi
                         break;
 
                     case 2:
-                        if(Build.VERSION.SDK_INT >= 23){
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                                    Manifest.permission.CALL_PHONE)) {
-//                          如果app之前请求过该权限,被用户拒绝, 这个方法就会返回true.
-//                          如果用户之前拒绝权限的时候勾选了对话框中”Don’t ask again”的选项,那么这个方法会返回false.
-//                          如果设备策略禁止应用拥有这条权限, 这个方法也返回false.
-                                // 弹窗需要解释为何需要该权限，再次请求授权
-                                Toast.makeText(getContext(), "请授权！", Toast.LENGTH_LONG).show();
-                                // 帮跳转到该应用的设置界面，让用户手动授权
-                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-                                intent.setData(uri);
-                                startActivity(intent);
-                            }else{
-                                // 不需要解释为何需要该权限，直接请求授权
-                                EasyPermissions.requestPermissions(HeartFragment.this,
-                                        "需要拨打电话权限",
-                                        MY_PERMISSIONS_REQUEST_CALL_PHONE,
-                                        Manifest.permission.CALL_PHONE
-                                );
-                            }
-
-                        }else {
-                            CallPhone();
-                        }
+                        ActivityUtils.startActivity(getActivity(), CallPhoneActivity.class);
                         break;
+
                     case 3:
                         ActivityUtils.startActivity(getActivity(), PhotoViewActivity.class);
                         break;
@@ -186,24 +166,6 @@ public class HeartFragment extends BaseFragment implements EasyPermissions.Permi
         });
 
 
-    }
-
-
-    private void CallPhone() {
-        String number = "15129933947";
-        if (TextUtils.isEmpty(number)) {
-            // 提醒用户
-            // 注意：在这个匿名内部类中如果用this则表示是View.OnClickListener类的对象，
-            // 所以必须用MainActivity.this来指定上下文环境。
-
-        } else {
-            // 拨号：激活系统的拨号组件
-            Intent intent = new Intent(); // 意图对象：动作 + 数据
-            intent.setAction(Intent.ACTION_CALL); // 设置动作
-            Uri data = Uri.parse("tel:" + number); // 设置数据
-            intent.setData(data);
-            startActivity(intent); // 激活Activity组件
-        }
     }
 
 
@@ -222,13 +184,5 @@ public class HeartFragment extends BaseFragment implements EasyPermissions.Permi
     }
 
 
-    @Override
-    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        CallPhone();
-    }
 
-    @Override
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-        ToastUtils.showShort("授权被拒绝");
-    }
 }

@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
 
     <application
@@ -43,6 +44,7 @@
         <activity android:name=".modules.firstmodule.photoview.BigPictureActivity" />
         <activity android:name=".modules.firstmodule.photoview.PhotoViewActivity" />
         <activity android:name=".modules.fifthmodule.google.GoogleVideoActivity" />
+        <activity android:name=".modules.firstmodule.phone.CallPhoneActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

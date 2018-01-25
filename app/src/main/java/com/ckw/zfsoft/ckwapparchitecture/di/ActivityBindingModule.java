@@ -10,6 +10,8 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewModule;
 
@@ -46,4 +48,8 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = GoogleVideoModule.class)
     abstract GoogleVideoActivity googleVideoActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = CallPhoneModule.class)
+    abstract CallPhoneActivity callPhoneActivity();
 }
