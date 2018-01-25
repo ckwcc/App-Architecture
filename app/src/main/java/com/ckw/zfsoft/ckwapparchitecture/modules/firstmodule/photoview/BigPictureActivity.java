@@ -1,4 +1,4 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.photo_view;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview;
 
 
 import android.support.annotation.Nullable;

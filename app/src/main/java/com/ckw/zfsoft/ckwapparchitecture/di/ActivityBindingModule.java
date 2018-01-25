@@ -8,7 +8,8 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.gsy.GsyModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkModule;
-import com.ckw.zfsoft.ckwapparchitecture.modules.secondmodule.photo_view.BigPictureActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -36,4 +37,7 @@ public abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = GsyModule.class)
     abstract GsyActivity gsyActivity();
 
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = PhotoViewModule.class)
+    abstract PhotoViewActivity photoViewActivity();
 }

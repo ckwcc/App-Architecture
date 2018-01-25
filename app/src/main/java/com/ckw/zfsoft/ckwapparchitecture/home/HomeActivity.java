@@ -213,7 +213,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
             medalFragment = (MedalFragment) mFragmentManager.findFragmentByTag(TAG_MEDAL_FRAGMENT);
         }else {
             mHeartFragment = getHeartFragment;
-            mHeartFragment.setModeListener(modeChooseListener);
             mDiplomaFragment = getDiplomaFragment;
             mCupFragment = getCupFragment;
             mFlagFragment = getFlagFragment;
@@ -302,35 +301,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
 
     }
 
-
-    private View.OnClickListener modeChooseListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.btn_night:
-                    SkinCompatManager.getInstance().loadSkin("night.skin", new SkinCompatManager.SkinLoaderListener() {
-                        @Override
-                        public void onStart() {
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            //这里是切换成功后的回调，可以做一些自己想要的设置
-                            EventBus.getDefault().post(new NightMessageEvent(true));
-                        }
-
-                        @Override
-                        public void onFailed(String s) {
-                        }
-                    });
-                    break;
-                case R.id.btn_normal:
-                    SkinCompatManager.getInstance().restoreDefaultTheme();
-                    EventBus.getDefault().post(new NightMessageEvent(false));
-                    break;
-            }
-        }
-    };
 
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void onNightEvent(NightMessageEvent nightMessageEvent){

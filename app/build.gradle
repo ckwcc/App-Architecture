@@ -7,11 +7,14 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.ckw.zfsoft.ckwapparchitecture"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // Enabling multidex support.
+        multiDexEnabled true
 
         javaCompileOptions {
             annotationProcessorOptions.includeCompileClasspath = true

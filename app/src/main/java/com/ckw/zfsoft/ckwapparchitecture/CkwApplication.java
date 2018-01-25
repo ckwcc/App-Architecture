@@ -1,5 +1,8 @@
 package com.ckw.zfsoft.ckwapparchitecture;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.ckw.zfsoft.ckwapparchitecture.di.AppComponent;
 import com.ckw.zfsoft.ckwapparchitecture.di.DaggerAppComponent;
 import com.ckw.zfsoft.ckwapparchitecture.utils.Utils;
@@ -43,5 +46,11 @@ public class CkwApplication extends DaggerApplication {
             LeakCanary.install(this);
         }
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

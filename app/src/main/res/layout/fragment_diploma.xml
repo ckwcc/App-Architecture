@@ -16,9 +16,9 @@
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recyclerView"
             app:scrollbars="none"
+            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
             android:background="#fff" />
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter

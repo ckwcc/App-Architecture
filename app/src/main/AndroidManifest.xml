@@ -40,7 +40,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".modules.secondmodule.photo_view.BigPictureActivity" />
+        <activity android:name=".modules.firstmodule.photoview.BigPictureActivity" />
+        <activity android:name=".modules.firstmodule.photoview.PhotoViewActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"

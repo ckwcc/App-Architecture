@@ -4,24 +4,35 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.ckw.zfsoft.ckwapparchitecture.MainActivity;
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
-import com.ckw.zfsoft.ckwapparchitecture.home.HomeActivity;
-import com.ckw.zfsoft.ckwapparchitecture.utils.PhoneUtils;
+import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
+import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaAdapter;
+import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.SizeUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.ToastUtils;
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +40,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import pub.devrel.easypermissions.EasyPermissions;
+import skin.support.SkinCompatManager;
 
 /**
  * Created by ckw
@@ -36,21 +49,18 @@ import butterknife.BindView;
  * Android的换肤功能
  */
 @ActivityScoped
-public class HeartFragment extends BaseFragment {
+public class HeartFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks{
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
     @BindView(R.id.banner)
     Banner mBanner;
-    @BindView(R.id.btn_night)
-    Button mNightMode;
 
-    @BindView(R.id.btn_normal)
-    Button mNormalMode;
+    @BindView(R.id.easy_recycler)
+    EasyRecyclerView mEasyRecyclerView;
 
-    @BindView(R.id.btn_phone)
-    Button mPhone;
+    private DiplomaAdapter mAdapter;
+    private List<String> mData;
 
-    private View.OnClickListener mModeChoose;
 
     @Inject
     public HeartFragment(){
@@ -69,7 +79,7 @@ public class HeartFragment extends BaseFragment {
 
     @Override
     protected void initVariables() {
-
+        initEasyRecyclerViewData();
     }
 
     @Override
@@ -92,63 +102,92 @@ public class HeartFragment extends BaseFragment {
         mBanner.setIndicatorGravity(BannerConfig.RIGHT);
         //banner设置方法全部调用完毕时最后调用
         mBanner.start();
+
+        SpaceDecoration itemDecoration = new SpaceDecoration((int) SizeUtils.dp2px(8));//参数是距离宽度
+        itemDecoration.setPaddingEdgeSide(true);//是否为左右2边添加padding.默认true.
+        itemDecoration.setPaddingStart(true);//是否在给第一行的item添加上padding(不包含header).默认true.
+        itemDecoration.setPaddingHeaderFooter(false);//是否对Header与Footer有效,默认false.
+        mEasyRecyclerView.addItemDecoration(itemDecoration);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4);
+        gridLayoutManager.setSpanSizeLookup(mAdapter.obtainGridSpanSizeLookUp(2));
+        mEasyRecyclerView.setVerticalScrollBarEnabled(false);
+        //去除recycleView滑动到边界时的阴影效果
+        mEasyRecyclerView.getRecyclerView().setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mEasyRecyclerView.setLayoutManager(gridLayoutManager);
+        mEasyRecyclerView.setAdapter(mAdapter);
+
     }
 
     @Override
     protected void initListener() {
-        mNightMode.setOnClickListener(new View.OnClickListener() {
+        mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                mModeChoose.onClick(v);
-            }
-        });
+            public void onItemClick(int position) {
+                switch (position){
+                    case 0:
+                        SkinCompatManager.getInstance().loadSkin("night.skin", new SkinCompatManager.SkinLoaderListener() {
+                            @Override
+                            public void onStart() {
+                            }
 
-        mNormalMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mModeChoose.onClick(v);
-            }
-        });
+                            @Override
+                            public void onSuccess() {
+                                //这里是切换成功后的回调，可以做一些自己想要的设置
+                                EventBus.getDefault().post(new NightMessageEvent(true));
+                            }
 
-        mPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 检查是否获得了权限（Android6.0运行时权限）
-                if (ContextCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                    // 没有获得授权，申请授权
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                            Manifest.permission.CALL_PHONE)) {
-                        // 返回值：
+                            @Override
+                            public void onFailed(String s) {
+                            }
+                        });
+                        break;
+                    case 1:
+                        SkinCompatManager.getInstance().restoreDefaultTheme();
+                        EventBus.getDefault().post(new NightMessageEvent(false));
+                        break;
+
+                    case 2:
+                        if(Build.VERSION.SDK_INT >= 23){
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                    Manifest.permission.CALL_PHONE)) {
 //                          如果app之前请求过该权限,被用户拒绝, 这个方法就会返回true.
 //                          如果用户之前拒绝权限的时候勾选了对话框中”Don’t ask again”的选项,那么这个方法会返回false.
 //                          如果设备策略禁止应用拥有这条权限, 这个方法也返回false.
-                        // 弹窗需要解释为何需要该权限，再次请求授权
-                        Toast.makeText(getContext(), "请授权！", Toast.LENGTH_LONG).show();
+                                // 弹窗需要解释为何需要该权限，再次请求授权
+                                Toast.makeText(getContext(), "请授权！", Toast.LENGTH_LONG).show();
+                                // 帮跳转到该应用的设置界面，让用户手动授权
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                            }else{
+                                // 不需要解释为何需要该权限，直接请求授权
+                                EasyPermissions.requestPermissions(HeartFragment.this,
+                                        "需要拨打电话权限",
+                                        MY_PERMISSIONS_REQUEST_CALL_PHONE,
+                                        Manifest.permission.CALL_PHONE
+                                );
+                            }
 
-                        // 帮跳转到该应用的设置界面，让用户手动授权
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-                        intent.setData(uri);
-                        startActivity(intent);
-                    }else{
-                        // 不需要解释为何需要该权限，直接请求授权
-                        ActivityCompat.requestPermissions(getActivity(),
-                                new String[]{Manifest.permission.CALL_PHONE},
-                                MY_PERMISSIONS_REQUEST_CALL_PHONE);
-                    }
-                }else {
-                    // 已经获得授权，可以打电话
-                    CallPhone();
+                        }else {
+                            CallPhone();
+                        }
+                        break;
+                    case 3:
+                        ActivityUtils.startActivity(getActivity(), PhotoViewActivity.class);
+                        break;
+
+
+                    default:
+                        ToastUtils.showShort("position:"+position);
+                        break;
                 }
             }
-
         });
+
+
     }
 
-    public void setModeListener(View.OnClickListener modeListener){
-        this.mModeChoose = modeListener;
-    }
 
     private void CallPhone() {
         String number = "15129933947";
@@ -167,24 +206,29 @@ public class HeartFragment extends BaseFragment {
         }
     }
 
-    // 处理权限申请的回调
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode){
-            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 授权成功，继续打电话
-                    CallPhone();
-                } else {
-                    // 授权失败！
-                    Toast.makeText(getContext(), "授权失败！", Toast.LENGTH_LONG).show();
-                }
-                break;
-            }
-        }
 
+    private void initEasyRecyclerViewData(){
+        mData = new ArrayList<>();
+
+        mData.add("夜间模式");
+        mData.add("默认模式");
+        mData.add("拨打电话");
+        mData.add("PhotoView");
+        for (int i = 0; i < 6; i++) {
+            mData.add("未完待续");
+        }
+        mAdapter = new DiplomaAdapter(getContext());
+        mAdapter.addAll(mData);
     }
 
 
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        CallPhone();
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        ToastUtils.showShort("授权被拒绝");
+    }
 }
