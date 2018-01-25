@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorAccent"
-    android:layout_width="200dp"
+    android:background="@color/colorGray"
+    android:layout_width="150dp"
     android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:src="@mipmap/icon_back"
+        android:layout_alignParentEnd="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
     <TextView
         android:id="@+id/tv_username"
-        android:text="用户名"
-        android:background="@color/colorLogin"
+        android:text="用户名:ckw"
+        android:textColor="@color/colorText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="20dp" />
 
     <TextView
         android:id="@+id/tv_user_phone"
         android:layout_below="@+id/tv_username"
-        android:text="15188888888"
+        android:text="手机号码：15188888888"
+        android:textColor="@color/colorText"
+        android:layout_marginBottom="40dp"
         android:layout_marginTop="5dp"
-        android:background="@color/colorLogin"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="20dp" />
 
-    <TextView
-        android:id="@+id/tv_close"
-        android:layout_below="@+id/tv_user_phone"
-        android:layout_centerHorizontal="true"
-        android:text="关闭"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="@color/colorLogin"
-        android:layout_width="80dp"
-        android:layout_height="40dp" />
 
 </RelativeLayout>
