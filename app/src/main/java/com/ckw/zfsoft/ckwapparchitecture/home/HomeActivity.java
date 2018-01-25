@@ -111,13 +111,13 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
 
     @Override
     protected boolean needToolbar() {
-        return true;
+        return false;
     }
 
     @Override
     public void setToolbar() {
-        setDisplayHomeAsUpEnabled(true);
-        setToolBarSubTitle("");
+//        setDisplayHomeAsUpEnabled(true);
+//        setToolBarSubTitle("");
     }
 
     @Override
@@ -163,23 +163,23 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         hideAllFragment();
         switch (currentIndex){
             case 0:
-                setToolBarTitle("heart");
+//                setToolBarTitle("heart");
                 FragmentUtils.show(mHeartFragment);
                 break;
             case 1:
-                setToolBarTitle("cup");
+//                setToolBarTitle("cup");
                 FragmentUtils.show(mCupFragment);
                 break;
             case 2:
-                setToolBarTitle("diploma");
+//                setToolBarTitle("diploma");
                 FragmentUtils.show(mDiplomaFragment);
                 break;
             case 3:
-                setToolBarTitle("flag");
+//                setToolBarTitle("flag");
                 FragmentUtils.show(mFlagFragment);
                 break;
             case 4:
-                setToolBarTitle("medal");
+//                setToolBarTitle("medal");
                 FragmentUtils.show(medalFragment);
                 break;
         }
@@ -230,7 +230,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         NavigationTabBar.Model firstModel = new NavigationTabBar.Model.Builder(
                 ContextCompat.getDrawable(this, R.mipmap.ic_first),
                 Color.parseColor(colors[0])
-        ).title("Heart")
+        ).title("工具")
                 .badgeTitle("NTB")
                 .build();
 
@@ -238,7 +238,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
             firstModel = new NavigationTabBar.Model.Builder(
                     ContextCompat.getDrawable(this, R.mipmap.ic_second),
                     Color.parseColor(colors[0])
-            ).title("Night")
+            ).title("工具")
                     .badgeTitle("NTB")
                     .build();
         }
@@ -253,7 +253,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         NavigationTabBar.Model thirdModel = new NavigationTabBar.Model.Builder(
                 ContextCompat.getDrawable(this, R.mipmap.ic_third),
                 Color.parseColor(colors[2])
-        ).title("Diploma")
+        ).title("列表")
                 .badgeTitle("state")
                 .build();
 
@@ -267,7 +267,7 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         NavigationTabBar.Model fifthModel = new NavigationTabBar.Model.Builder(
                 ContextCompat.getDrawable(this, R.mipmap.ic_fifth),
                 Color.parseColor(colors[4])
-        ).title("Medal")
+        ).title("视频")
                 .badgeTitle("777")
                 .build();
 

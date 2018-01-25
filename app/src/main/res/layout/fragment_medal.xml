@@ -2,13 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.MovieView
-        android:id="@+id/movie"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:src="@raw/vid_bigbuckbunny"
-        android:title="@string/title_bigbuckbunny"/>
 
     <Button
         android:id="@+id/btn_ijk"
@@ -27,5 +20,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/btn_google"
+        android:text="google"
+        android:layout_toEndOf="@+id/btn_gsy_video_player"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

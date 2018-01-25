@@ -389,4 +389,18 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
                 .init();
     }
 
+    /**
+     * 解决切换主题时，顶部状态栏颜色变为默认的天蓝色问题
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mImmersionBar == null) {
+            return;
+        }
+        mImmersionBar.statusBarDarkFont(true);
+        mImmersionBar.statusBarColor(R.color.colorWhite)
+                .fitsSystemWindows(true)
+                .init();
+    }
 }
