@@ -1,35 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/colorGray"
-    android:layout_width="150dp"
-    android:layout_height="150dp">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="340dp"
+    android:layout_height="184dp"
+    android:background="@color/colorWhite">
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:src="@mipmap/icon_back"
-        android:layout_alignParentEnd="true"
-        android:layout_width="30dp"
-        android:layout_height="30dp" />
+    <RelativeLayout
+        android:id="@+id/rl_phone_head"
+        android:layout_width="match_parent"
+        android:layout_height="92dp">
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@mipmap/close"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_username"
-        android:text="用户名:ckw"
-        android:textColor="@color/colorText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp" />
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/phone_user_bg"
+            android:src="@mipmap/xxx1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_user_phone"
-        android:layout_below="@+id/tv_username"
-        android:text="手机号码：15188888888"
-        android:textColor="@color/colorText"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/iv_user"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="用户名"
+            android:textSize="16sp"
+            android:textColor="@color/colorText"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
 
 
-</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:background="@color/colorOrangeRed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_phone_head"
+       >
+
+        <TextView
+            android:id="@+id/tv_department"
+            android:text="所属部门"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_school"
+            android:text="学校"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

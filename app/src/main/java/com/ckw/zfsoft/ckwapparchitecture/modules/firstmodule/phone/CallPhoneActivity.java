@@ -1,7 +1,11 @@
 package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
@@ -9,6 +13,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,14 +22,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
-import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.HeartFragment;
-import com.ckw.zfsoft.ckwapparchitecture.utils.ScreenUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.SizeUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ToastUtils;
 
@@ -46,6 +48,11 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
     @BindView(R.id.btn_show)
     Button mShow;
 
+    @BindView(R.id.btn_jump)
+    Button mJump;
+
+    private AlertDialog dialog;
+
     @Override
     protected void initView(Bundle savedInstanceState) {
 
@@ -63,11 +70,17 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
 
     @Override
     protected void initListener() {
+        mJump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startActivity(CallPhoneActivity.this, CallPhoneServiceActivity.class);
+            }
+        });
         mCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (Build.VERSION.SDK_INT >= 23) {
-                    Log.d("----", "onClick: 大于23");
                     if (ActivityCompat.shouldShowRequestPermissionRationale(CallPhoneActivity.this,
                             Manifest.permission.CALL_PHONE)) {
 //                          如果app之前请求过该权限,被用户拒绝, 这个方法就会返回true.
@@ -81,7 +94,6 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
                         intent.setData(uri);
                         startActivity(intent);
                     } else {
-                        Log.d("----", "onClick: 直接申请");
                         // 不需要解释为何需要该权限，直接请求授权
                         EasyPermissions.requestPermissions(CallPhoneActivity.this,
                                 "需要拨打电话权限",
@@ -124,17 +136,16 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
 
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (Settings.canDrawOverlays(getApplicationContext())) {
-                showFloatView();
-                CallPhone();
-            } else {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                startActivity(intent);
-            }
+        if (Settings.canDrawOverlays(getApplicationContext())) {
+            showFloatView();
+            CallPhone();
+        } else {
+            showSaveDialog();
         }
+
     }
 
     @Override
@@ -142,8 +153,42 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
         ToastUtils.showShort("授权被拒绝");
     }
 
+
+    private void showSaveDialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("温馨提示：");
+        builder.setMessage("是否要个性化拨号界面(直接跳转到权限设置界面)");
+        builder.setNegativeButton("不需要", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CallPhone();
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("需要", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (Settings.canDrawOverlays(getApplicationContext())) {
+                        showFloatView();
+                        CallPhone();
+                    } else {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                        startActivity(intent);
+                    }
+                }
+
+                dialog.dismiss();
+
+            }
+        });
+        dialog = builder.show();
+
+    }
+
+    @SuppressLint("MissingPermission")
     private void CallPhone() {
-        String number = "15188888888";
+        String number = "18888888888";
         if (TextUtils.isEmpty(number)) {
             // 提醒用户
             // 注意：在这个匿名内部类中如果用this则表示是View.OnClickListener类的对象，
@@ -151,13 +196,30 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
 
         } else {
             // 拨号：激活系统的拨号组件
-            showFloatView();
-            Intent intent = new Intent(); // 意图对象：动作 + 数据
-            intent.setAction(Intent.ACTION_CALL); // 设置动作
-            Uri data = Uri.parse("tel:" + number); // 设置数据
-            intent.setData(data);
-            startActivity(intent); // 激活Activity组件
+            Uri uri = Uri.parse("tel:" + number);
+            Intent callIntent = new Intent(Intent.ACTION_CALL, uri);//ACTION_DIAL
+            PackageManager packageManager = this.getPackageManager();
+            List<ResolveInfo> activities = packageManager.queryIntentActivities(callIntent, 0);
+            boolean isIntentSafe = activities != null && activities.size() > 0;
+            if (isIntentSafe) {
+                startActivityForResult(callIntent,10086);
+            }
+
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10086){
+            Log.d("----", "onActivityResult: 回调");
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public void showFloatView() {
@@ -165,23 +227,27 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
 
         final View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.window_over_flow, null);
         final ImageView close = (ImageView) inflate.findViewById(R.id.iv_close);
+
+        final WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.type = WindowManager.LayoutParams.TYPE_PHONE;
+        params.format = PixelFormat.RGBA_8888;
+        params.gravity = Gravity.CENTER;
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        //这边控制悬浮框的大小
+        params.height = SizeUtils.dp2px(184);
+        params.width = SizeUtils.dp2px(340);
+
+        params.x = 0;
+        params.y = 0;
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 windowManager.removeViewImmediate(inflate);
             }
         });
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-        params.type = WindowManager.LayoutParams.TYPE_PHONE;
-        params.format = PixelFormat.RGBA_8888;
-        params.gravity = Gravity.CENTER;
-        params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        //这边控制悬浮框的大小
-        params.width = SizeUtils.dp2px(200);
-        params.height = SizeUtils.dp2px(150);
-        params.x = 0;
-        params.y = 0;
         windowManager.addView(inflate, params);
+
+
     }
 
 

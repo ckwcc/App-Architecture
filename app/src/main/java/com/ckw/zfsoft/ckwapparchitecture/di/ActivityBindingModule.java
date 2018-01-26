@@ -12,6 +12,8 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.fifthmodule.ijk.IjkModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneServiceActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneServiceModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewModule;
 
@@ -52,4 +54,8 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = CallPhoneModule.class)
     abstract CallPhoneActivity callPhoneActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = CallPhoneServiceModule.class)
+    abstract CallPhoneServiceActivity callPhoneServiceActivity();
 }
