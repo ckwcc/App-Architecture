@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.phone_inject.PhoneInfo;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.phone_inject.PhoneInfoContract;
-
+import com.ckw.zfsoft.ckwapparchitecture.utils.SPUtils;
 
 
 /**
@@ -48,15 +48,17 @@ public class PhoneReceive extends BroadcastReceiver implements PhoneInfoContract
 
 
     PhoneStateListener listener = new PhoneStateListener(){
+
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             //注意，方法必须写在super方法后面，否则incomingNumber无法获取到值。
             super.onCallStateChanged(state, incomingNumber);
+
             switch(state){
-                case TelephonyManager.CALL_STATE_IDLE://没有任何状态
-                    Intent phoneIntent = new Intent(mContext,PhoneService.class);
-                    phoneIntent.putExtra("phoneState",TelephonyManager.CALL_STATE_IDLE);
-                    mContext.startService(phoneIntent);
+                case TelephonyManager.CALL_STATE_IDLE://没有任何状态（包括挂断）
+                        Intent phoneIntent = new Intent(mContext,PhoneService.class);
+                        phoneIntent.putExtra("phoneState",TelephonyManager.CALL_STATE_IDLE);
+                        mContext.startService(phoneIntent);
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK://应该是打电话的状态，通话中（接起电话了）
                     break;

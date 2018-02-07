@@ -49,8 +49,6 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
     @BindView(R.id.btn_show)
     Button mShow;
 
-    @BindView(R.id.btn_jump)
-    Button mJump;
 
     private static final int REQUEST_PERMISSIONS_CODE = 1;
     private AlertDialog tipDialog;
@@ -72,12 +70,7 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
 
     @Override
     protected void initListener() {
-        mJump.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityUtils.startActivity(CallPhoneActivity.this, CallPhoneServiceActivity.class);
-            }
-        });
+
         mCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

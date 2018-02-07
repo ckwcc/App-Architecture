@@ -47,7 +47,6 @@
         <activity android:name=".modules.firstmodule.photoview.PhotoViewActivity" />
         <activity android:name=".modules.fifthmodule.google.GoogleVideoActivity" />
         <activity android:name=".modules.firstmodule.phone.CallPhoneActivity" />
-        <activity android:name=".modules.firstmodule.phone.CallPhoneServiceActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

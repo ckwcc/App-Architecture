@@ -51,7 +51,7 @@ public class PhoneService extends Service{
         // 开启定时器，每隔0.5秒刷新一次
         if (timer == null) {
             timer = new Timer();
-            timer.scheduleAtFixedRate(new RefreshTask(userName,userDep), 0, 3000);
+            timer.scheduleAtFixedRate(new RefreshTask(userName,userDep), 0, 6000);
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -93,6 +93,7 @@ public class PhoneService extends Service{
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("----", "run: 需要移除window:"+mPhoneState);
                         PhoneWindowManager.removeBigWindow(getApplicationContext());
                         Intent intent = new Intent(getApplicationContext(), PhoneService.class);
                         getApplicationContext().stopService(intent);
