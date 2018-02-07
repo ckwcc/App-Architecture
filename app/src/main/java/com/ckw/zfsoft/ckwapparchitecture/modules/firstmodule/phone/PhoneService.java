@@ -32,7 +32,7 @@ public class PhoneService extends Service{
      * 定时器，定时进行检测当前应该创建还是移除悬浮窗。
      */
     private Timer timer;
-    private int mPhoneState;//0 挂断 1 来电 2 通话中 3 主动拨号
+    private int mPhoneState;//0 没有任何状态（包括挂断电话） 1 来电 2 通话中   自定义的，3 主动拨号
 
     @Override
     public void onCreate() {
@@ -44,14 +44,14 @@ public class PhoneService extends Service{
         mPhoneState = intent.getIntExtra("phoneState",0);
         String userName = "";
         String userDep = "";
-        if(mPhoneState == 3){//拨打电话
+        if(mPhoneState == 3 || mPhoneState == 1){//拨打电话 这里后面还需要加个 1的类型
             userName = intent.getStringExtra("userName");
             userDep = intent.getStringExtra("userDep");
         }
         // 开启定时器，每隔0.5秒刷新一次
         if (timer == null) {
             timer = new Timer();
-            timer.scheduleAtFixedRate(new RefreshTask(userName,userDep), 0, 500);
+            timer.scheduleAtFixedRate(new RefreshTask(userName,userDep), 0, 3000);
         }
         return super.onStartCommand(intent, flags, startId);
     }

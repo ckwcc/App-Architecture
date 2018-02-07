@@ -8,6 +8,9 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.phone_inject.PhoneInfo;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.phone_inject.PhoneInfoContract;
+
 
 
 /**
@@ -15,9 +18,10 @@ import android.util.Log;
  * on 2018/1/29.
  */
 
-public class PhoneReceive extends BroadcastReceiver {
+public class PhoneReceive extends BroadcastReceiver implements PhoneInfoContract.View{
 
     private Context mContext;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -49,26 +53,47 @@ public class PhoneReceive extends BroadcastReceiver {
             //注意，方法必须写在super方法后面，否则incomingNumber无法获取到值。
             super.onCallStateChanged(state, incomingNumber);
             switch(state){
-                case TelephonyManager.CALL_STATE_IDLE:
-                    Log.d("----", "onCallStateChanged: 挂断");
+                case TelephonyManager.CALL_STATE_IDLE://没有任何状态
                     Intent phoneIntent = new Intent(mContext,PhoneService.class);
-                    //这边传过去可以接收到
                     phoneIntent.putExtra("phoneState",TelephonyManager.CALL_STATE_IDLE);
                     mContext.startService(phoneIntent);
                     break;
-                case TelephonyManager.CALL_STATE_OFFHOOK://应该是打电话的状态，通话中
-                    Log.d("----", "onCallStateChanged: 接听");
+                case TelephonyManager.CALL_STATE_OFFHOOK://应该是打电话的状态，通话中（接起电话了）
                     break;
                 case TelephonyManager.CALL_STATE_RINGING://响铃，比如来电
-                    //输出来电号码
-                    Log.d("----", "onCallStateChanged: 来电号码："+incomingNumber);
-                    Intent ringingIntent = new Intent(mContext,PhoneService.class);
-                    ringingIntent.putExtra("userName","CKW来电");
-                    ringingIntent.putExtra("userDep","移动校园");
-                    ringingIntent.putExtra("phoneState",3);
-                    mContext.startService(ringingIntent);
+                   //发起网络请求
+
                     break;
             }
         }
     };
+
+
+    @Override
+    public void showPhoneInfoResult(PhoneInfo info) {
+        //接听电话，在这里开启service，目前没有网络接口，还不不需要
+        Intent ringingIntent = new Intent(mContext,PhoneService.class);
+                    ringingIntent.putExtra("userName",info.getXm());
+                    ringingIntent.putExtra("userDep",info.getDepname());
+        ringingIntent.putExtra("phoneState",TelephonyManager.CALL_STATE_RINGING);
+        mContext.startService(ringingIntent);
+
+    }
+
+
+    @Override
+    public void showError(String msg) {
+        Log.d("----", "showError: "+msg);
+    }
+
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public boolean isActive() {
+        return true;
+    }
 }

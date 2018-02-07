@@ -1,7 +1,5 @@
 package com.ckw.zfsoft.ckwapparchitecture.NetLoader;
 
-import android.content.Context;
-import android.util.Log;
 
 import com.ckw.zfsoft.ckwapparchitecture.base.BasePresenter;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseView;

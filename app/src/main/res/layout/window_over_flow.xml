@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/rl_root_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_root_view"
     android:layout_width="340dp"
     android:layout_height="184dp"
     android:background="@color/colorWhite">
@@ -21,7 +20,9 @@
             android:layout_marginTop="12dp"
             android:src="@mipmap/close"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp" />
 
         <ImageView
             android:id="@+id/iv_user"
@@ -30,10 +31,11 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/phone_user_bg"
-            android:src="@mipmap/xxx1"
+            android:src="@mipmap/iv_icon_user_default"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp" />
 
         <TextView
             android:id="@+id/tv_username"
@@ -47,13 +49,13 @@
             android:textSize="16sp"
             android:textColor="@color/colorText"
             android:textStyle="bold"
-            />
+            android:layout_toRightOf="@+id/iv_user"
+            android:layout_marginLeft="16dp" />
     </RelativeLayout>
 
 
 
     <RelativeLayout
-        android:layout_below="@+id/rl_phone_head"
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:background="@color/colorOrangeRed"
@@ -62,7 +64,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rl_phone_head"
-       >
+        >
 
         <TextView
             android:id="@+id/tv_department"
@@ -75,16 +77,17 @@
 
         <TextView
             android:id="@+id/tv_school"
-            android:text="学校"
+            android:text="西安电子科技大学"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp" />
 
     </RelativeLayout>
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

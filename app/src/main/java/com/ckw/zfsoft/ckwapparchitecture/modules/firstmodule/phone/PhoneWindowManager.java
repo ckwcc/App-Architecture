@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.WindowManager;
 
 
-
 /**
  * Created by ckw
  * on 2018/1/26.
@@ -39,7 +38,7 @@ public class PhoneWindowManager {
 
 
     /**
-     * 创建一个大悬浮窗。位置为屏幕正中间。
+     * 创建一个悬浮窗。位置为屏幕正中间。
      *
      * @param context
      *            必须为应用程序的Context.

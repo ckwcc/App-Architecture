@@ -59,8 +59,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-        <service android:name=".modules.firstmodule.phone.PhoneService" />
+        <service android:name=".modules.firstmodule.phone.PhoneService"/>
+        <service android:name=".modules.fifthmodule.ijk.media.MediaPlayerService"/>
 
         <receiver android:name=".modules.firstmodule.phone.PhoneReceive">
             <intent-filter>
@@ -69,6 +69,7 @@
                 <action android:name="com.ckw.CUSTOM_PHONE"/>
             </intent-filter>
         </receiver>
+
 
     </application>
 
