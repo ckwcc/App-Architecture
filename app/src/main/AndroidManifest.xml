@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--用于监听电话状态-->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
 
 
     <application
@@ -57,6 +59,16 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+
+        <service android:name=".modules.firstmodule.phone.PhoneService" />
+
+        <receiver android:name=".modules.firstmodule.phone.PhoneReceive">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+                <action android:name="com.ckw.CUSTOM_PHONE"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 

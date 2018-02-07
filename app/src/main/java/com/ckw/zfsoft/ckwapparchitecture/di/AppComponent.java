@@ -38,7 +38,6 @@ public interface AppComponent extends AndroidInjector<CkwApplication> {
 
     Retrofit getRetrofit();
 
-
     @Component.Builder
     interface Builder {
 
