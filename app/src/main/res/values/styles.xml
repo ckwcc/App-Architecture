@@ -33,5 +33,20 @@
         <item name="android:adjustViewBounds">false</item>
     </style>
 
+    <!--textInputLayout 上弹时的文字颜色-->
+    <style name="text_input_layout_hint">
+        <item name="android:textColor">#ed7140</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="text_input_layout_error">
+        <item name="android:textColor">#ed4e40</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+
+
+
 
 </resources>

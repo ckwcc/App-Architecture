@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
@@ -34,6 +36,7 @@ import com.ckw.zfsoft.ckwapparchitecture.utils.ImageUtil;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ImageUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.LogUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.SDCardUtils;
+import com.ckw.zfsoft.ckwapparchitecture.utils.StringUtils;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -70,10 +73,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
 
     @BindView(R.id.iv_user)
     CircleImageView mUserImg;
-    @BindView(R.id.et_user_name)
-    EditText mUserName;
-    @BindView(R.id.et_user_pwd)
-    EditText mUserPwd;
+    @BindView(R.id.til_user_name)
+    TextInputLayout mUserName;
+    @BindView(R.id.til_user_pwd)
+    TextInputLayout mUserPwd;
     @BindView(R.id.tv_login)
     TextView mLogin;
 
@@ -111,9 +114,17 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = mUserName.getText().toString().trim();
-                String userPwd = mUserPwd.getText().toString().trim();
-                mPresenter.doLogin(userName,userPwd);
+                String userName = mUserName.getEditText().getText().toString().trim();
+                String userPwd = mUserPwd.getEditText().getText().toString().trim();
+
+                mUserName.setErrorEnabled(false);
+                mUserPwd.setErrorEnabled(false);
+                //验证用户名和密码
+                if(validateAccount(userName)&&validatePassword(userPwd)){
+                    mPresenter.doLogin(userName,userPwd);
+                }
+
+
             }
         });
 
@@ -403,4 +414,50 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
                 .fitsSystemWindows(true)
                 .init();
     }
+
+    /**
+     * 显示错误提示，并获取焦点
+     * @param textInputLayout
+     * @param error
+     */
+    private void showError(TextInputLayout textInputLayout, String error){
+        textInputLayout.setError(error);
+        textInputLayout.getEditText().setFocusable(true);
+        textInputLayout.getEditText().setFocusableInTouchMode(true);
+        textInputLayout.getEditText().requestFocus();
+    }
+
+    /**
+     * 验证用户名
+     * @param account
+     * @return
+     */
+    private boolean validateAccount(String account){
+        if(StringUtils.isEmpty(account)){
+            showError(mUserName,"用户名不能为空");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 验证密码
+     * @param password
+     * @return
+     */
+    private boolean validatePassword(String password) {
+        if (StringUtils.isEmpty(password)) {
+            showError(mUserPwd,"密码不能为空");
+            return false;
+        }
+
+        if (password.length() < 6 || password.length() > 16) {
+            showError(mUserPwd,"密码长度为6-16位");
+            return false;
+        }
+
+        return true;
+    }
+
+
 }
