@@ -14,6 +14,8 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActi
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -52,5 +54,9 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = CallPhoneModule.class)
     abstract CallPhoneActivity callPhoneActivity();
-    
+
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = PictureProcessModule.class)
+    abstract PictureProcessActivity pictureProcessActivity();
 }

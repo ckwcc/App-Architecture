@@ -26,6 +26,7 @@ import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
 import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaAdapter;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.SizeUtils;
@@ -156,6 +157,9 @@ public class HeartFragment extends BaseFragment {
                     case 3:
                         ActivityUtils.startActivity(getActivity(), PhotoViewActivity.class);
                         break;
+                    case 4:
+                        ActivityUtils.startActivity(getActivity(), PictureProcessActivity.class);
+                        break;
 
 
                     default:
@@ -176,7 +180,8 @@ public class HeartFragment extends BaseFragment {
         mData.add("默认模式");
         mData.add("拨打电话");
         mData.add("PhotoView");
-        for (int i = 0; i < 6; i++) {
+        mData.add("图片美颜");
+        for (int i = 0; i < 5; i++) {
             mData.add("未完待续");
         }
         mAdapter = new DiplomaAdapter(getContext());

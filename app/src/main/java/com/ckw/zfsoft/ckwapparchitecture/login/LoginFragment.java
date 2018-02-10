@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -78,7 +79,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
     @BindView(R.id.til_user_pwd)
     TextInputLayout mUserPwd;
     @BindView(R.id.tv_login)
-    TextView mLogin;
+    Button mLogin;
 
     private File mFile; //裁剪图片保存的位置
     private String mPackageName; //包名
@@ -114,6 +115,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("----", "onClick: 点击了按钮");
                 String userName = mUserName.getEditText().getText().toString().trim();
                 String userPwd = mUserPwd.getEditText().getText().toString().trim();
 
