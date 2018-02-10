@@ -18,21 +18,29 @@
   使用AndroidUtilCode框架，该第三方框架满足日常app开发的各种工具类，当然也可以将这个框架中的各种工具类copy下来，放在自己的项目中
   
 # 5.使用统一的风格
-  在基类中，使用统一的toolbar，便于头部管理，可以在继承的Activity中轻松地设置。同时在BaseActivity和BaseFragment中实现沉浸式状态栏，满足不同安卓版本的需求。
-  MVP模式使用统一的Presenter和View。
-  使用统一的bottomSheetDialogFragment,通过实现基类，轻松实现自定义从底部弹出的Dialog。
+  (一)在基类中，使用统一的toolbar，便于头部管理，可以在继承的Activity中轻松地设置。
+  
+  (二)同时在BaseActivity和BaseFragment中实现沉浸式状态栏，满足不同安卓版本的需求。
+  
+  (三)MVP模式使用统一的Presenter和View。
+  
+  (四)使用统一的bottomSheetDialogFragment,通过实现基类，轻松实现自定义从底部弹出的Dialog。
   
 # 6.数据展示
-  集成第三方框架，轻松实现各种酷炫的刷新头，刷新尾。可以配合FloatingActionButton使用。
-  几行代码搞定Banner轮播图。
+  (一)集成第三方框架，轻松实现各种酷炫的刷新头，刷新尾。可以配合FloatingActionButton使用。
+  
+  (二)几行代码搞定Banner轮播图。
   
 # 7.权限申请
   几行代码搞定各种权限申请，适配 Android M
   
 # 8.实现各种小功能
   (一)一键实现主题换肤功能，切换正常模式和夜间模式
+  
   (二)自定义电话界面显示
+  
   (三)PhotoView的简单使用，个性化图片展示
+  
   (四)对普通图片，例如拍照的，添加图片处理功能，例如图片模糊，加滤镜,图片特效等
 
   
