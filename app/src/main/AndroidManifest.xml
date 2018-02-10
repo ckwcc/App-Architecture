@@ -48,6 +48,9 @@
         <activity android:name=".modules.fifthmodule.google.GoogleVideoActivity" />
         <activity android:name=".modules.firstmodule.phone.CallPhoneActivity" />
         <activity android:name=".modules.firstmodule.picture_processing.PictureProcessActivity" />
+        <activity android:name=".modules.firstmodule.picture_processing.deal_picture.DealPictureActivity" />
+        <activity android:name=".modules.firstmodule.picture_processing.deal_picture.custom.ShowPicActivity" />
+        <activity android:name=".modules.firstmodule.picture_processing.deal_picture.custom.CameraActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

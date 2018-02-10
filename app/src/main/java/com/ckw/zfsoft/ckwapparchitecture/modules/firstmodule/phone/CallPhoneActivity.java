@@ -120,10 +120,6 @@ public class CallPhoneActivity extends BaseActivity implements EasyPermissions.P
                 REQUEST_PERMISSIONS_CODE, Manifest.permission.CALL_PHONE);
     }
 
-    @Override
-    protected boolean needToolbar() {
-        return false;
-    }
 
     @Override
     public void setToolbar() {

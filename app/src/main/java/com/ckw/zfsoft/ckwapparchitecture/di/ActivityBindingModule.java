@@ -16,6 +16,10 @@ import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoView
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewModule;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.DealPictureActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.DealPictureModule;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom.ShowPicActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom.ShowPicModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -59,4 +63,9 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = PictureProcessModule.class)
     abstract PictureProcessActivity pictureProcessActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = DealPictureModule.class)
+    abstract DealPictureActivity dealPictureActivity();
+
 }

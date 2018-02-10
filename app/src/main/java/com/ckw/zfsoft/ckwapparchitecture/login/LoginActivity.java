@@ -49,10 +49,6 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected boolean needToolbar() {
-        return false;
-    }
 
     @Override
     public void setToolbar() {

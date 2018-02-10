@@ -115,7 +115,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("----", "onClick: 点击了按钮");
                 String userName = mUserName.getEditText().getText().toString().trim();
                 String userPwd = mUserPwd.getEditText().getText().toString().trim();
 

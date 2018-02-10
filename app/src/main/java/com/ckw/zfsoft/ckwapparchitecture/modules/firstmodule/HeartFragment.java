@@ -27,6 +27,7 @@ import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.DealPictureActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.thirdmodule.DiplomaAdapter;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ActivityUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.SizeUtils;
@@ -160,6 +161,9 @@ public class HeartFragment extends BaseFragment {
                     case 4:
                         ActivityUtils.startActivity(getActivity(), PictureProcessActivity.class);
                         break;
+                    case 5:
+                        ActivityUtils.startActivity(getActivity(), DealPictureActivity.class);
+                        break;
 
 
                     default:
@@ -181,6 +185,7 @@ public class HeartFragment extends BaseFragment {
         mData.add("拨打电话");
         mData.add("PhotoView");
         mData.add("图片美颜");
+        mData.add("相机处理");
         for (int i = 0; i < 5; i++) {
             mData.add("未完待续");
         }

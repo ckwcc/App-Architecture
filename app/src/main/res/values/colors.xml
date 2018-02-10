@@ -9,6 +9,9 @@
     <!--统一的背景颜色-->
     <color name="colorGray">#cccccc</color>
 
+
+    <color name="colorSmallGray">#efeded</color>
+
     <color name="colorGreen">#09e740</color>
     <color name="colorGreenPressed">#15d244</color>
 
@@ -18,5 +21,9 @@
     <color name="colorOrangeRed">#ea6f66</color>
 
     <color name="common_divider_color">#f3f6f9</color>
+
+    <color name="Black4">#121415</color>
+    <color name="Black5">#242125</color>
+    <color name="Black6">#313641</color>
 
 </resources>

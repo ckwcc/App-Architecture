@@ -66,10 +66,6 @@ public class IjkActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected boolean needToolbar() {
-        return true;
-    }
 
     @Override
     public void setToolbar() {

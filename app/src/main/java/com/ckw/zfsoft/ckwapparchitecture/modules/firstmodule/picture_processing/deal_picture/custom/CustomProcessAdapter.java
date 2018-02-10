@@ -1,25 +1,12 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom;
 
-/**
- * Copyright (C) 2017 Wasabeef
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +16,15 @@ import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+
 import java.util.List;
+
 import jp.wasabeef.fresco.processors.BlurPostprocessor;
 import jp.wasabeef.fresco.processors.ColorFilterPostprocessor;
 import jp.wasabeef.fresco.processors.CombinePostProcessors;
@@ -50,10 +41,12 @@ import jp.wasabeef.fresco.processors.gpu.SwirlFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.ToonFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.VignetteFilterPostprocessor;
 
-public class PictureProcessAdapter extends RecyclerView.Adapter<PictureProcessAdapter.ViewHolder> {
+public class CustomProcessAdapter extends RecyclerView.Adapter<CustomProcessAdapter.ViewHolder> {
 
   private Context context;
   private List<Type> dataSet;
+  private SimpleDraweeView mTargetView;
+  private Uri mUri;
 
    enum Type {
     Mask,
@@ -69,22 +62,29 @@ public class PictureProcessAdapter extends RecyclerView.Adapter<PictureProcessAd
     Sketch,
     Swirl,
     Brightness,
-    Kuawahara,
+//    Kuawahara,
     Vignette,
     BlurAndGrayscale
   }
 
-  public PictureProcessAdapter(Context context, List<Type> dataSet) {
+  public CustomProcessAdapter(Context context, List<Type> dataSet) {
     this.context = context;
     this.dataSet = dataSet;
   }
 
+  public CustomProcessAdapter(Context context, List<Type> dataSet, SimpleDraweeView targetView, Uri uri) {
+    this.context = context;
+    this.dataSet = dataSet;
+    this.mTargetView = targetView;
+    mUri = uri;
+  }
+
   @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View v = LayoutInflater.from(context).inflate(R.layout.layout_list_item, parent, false);
+    View v = LayoutInflater.from(context).inflate(R.layout.layout_custom_list_item, parent, false);
     return new ViewHolder(v);
   }
 
-  @Override public void onBindViewHolder(ViewHolder holder, int position) {
+  @Override public void onBindViewHolder(final ViewHolder holder, final int position) {
     Context context = holder.itemView.getContext();
     Postprocessor processor = null;
 
@@ -140,9 +140,9 @@ public class PictureProcessAdapter extends RecyclerView.Adapter<PictureProcessAd
       case Brightness:
         processor = new BrightnessFilterPostprocessor(context, 0.5f);
         break;
-      case Kuawahara:
-        processor = new KuawaharaFilterPostprocessor(context, 25);
-        break;
+//      case Kuawahara://目前会导致代码奔溃，先不用了
+//        processor = new KuawaharaFilterPostprocessor(context, 25);
+//        break;
       case Vignette:
         processor = new VignetteFilterPostprocessor(context, new PointF(0.5f, 0.5f),
             new float[] { 0.0f, 0.0f, 0.0f }, 0f, 0.75f);
@@ -152,13 +152,35 @@ public class PictureProcessAdapter extends RecyclerView.Adapter<PictureProcessAd
         .setPostprocessor(processor)
         .build();
 
-    PipelineDraweeController controller =
+    final PipelineDraweeController controller =
         (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
             .setImageRequest(request)
             .setOldController(holder.drawee.getController())
             .build();
     holder.drawee.setController(controller);
     holder.title.setText(dataSet.get(position).name());
+
+
+    final Postprocessor finalProcessor = processor;
+    holder.drawee.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if(mTargetView != null){
+
+          ImageRequest requestTarget = ImageRequestBuilder.newBuilderWithSource(mUri)
+                  .setPostprocessor(finalProcessor)
+                  .build();
+
+          final PipelineDraweeController controllerTarget =
+                  (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                          .setImageRequest(requestTarget)
+                          .setOldController(mTargetView.getController())
+                          .setCallerContext(mUri)
+                          .build();
+            mTargetView.setController(controllerTarget);
+        }
+      }
+    });
   }
 
   @Override public int getItemCount() {

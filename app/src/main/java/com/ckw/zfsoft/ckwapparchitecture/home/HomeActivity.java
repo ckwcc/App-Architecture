@@ -109,10 +109,6 @@ public class HomeActivity extends BaseActivity implements NavigationTabBar.OnTab
         mNavigationTabBar.setOnTabBarSelectedIndexListener(this);
     }
 
-    @Override
-    protected boolean needToolbar() {
-        return false;
-    }
 
     @Override
     public void setToolbar() {
