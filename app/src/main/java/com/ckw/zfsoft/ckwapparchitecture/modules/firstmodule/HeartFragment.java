@@ -24,6 +24,7 @@ import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
 import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.camera2.CameraActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.camera2.NewCameraActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
@@ -168,6 +169,9 @@ public class HeartFragment extends BaseFragment {
                     case 6:
                         ActivityUtils.startActivity(getActivity(), NewCameraActivity.class);
                         break;
+                    case 7:
+                        ActivityUtils.startActivity(getActivity(), CameraActivity.class);
+                        break;
 
 
                     default:
@@ -191,6 +195,7 @@ public class HeartFragment extends BaseFragment {
         mData.add("图片美颜");
         mData.add("相机处理");
         mData.add("Camera2使用");
+        mData.add("google camera2");
         for (int i = 0; i < 4; i++) {
             mData.add("未完待续");
         }

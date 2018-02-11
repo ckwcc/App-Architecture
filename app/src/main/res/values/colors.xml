@@ -26,4 +26,6 @@
     <color name="Black5">#242125</color>
     <color name="Black6">#313641</color>
 
+    <color name="control_background">#cc4285f4</color>
+
 </resources>

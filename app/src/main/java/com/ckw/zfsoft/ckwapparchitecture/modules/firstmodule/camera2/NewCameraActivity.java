@@ -295,7 +295,8 @@ public class NewCameraActivity extends AppCompatActivity implements View.OnClick
     private void initView() {
         mTextureView =  (AutoFitTextureView)findViewById(R.id.texture);
         findViewById(R.id.picture).setOnClickListener(this);
-        findViewById(R.id.info).setOnClickListener(this);
+        findViewById(R.id.camera_close).setOnClickListener(this);
+//        findViewById(R.id.info).setOnClickListener(this);
         //创建文件
         mFile = new File(getExternalFilesDir(null), "pic.jpg");
     }
@@ -760,10 +761,13 @@ public class NewCameraActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.picture: {
+            case R.id.picture: //拍照
                 takePicture();
                 break;
-            }
+
+            case R.id.camera_close://关闭
+                finish();
+                break;
         }
     }
 

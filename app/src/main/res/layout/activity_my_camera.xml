@@ -25,7 +25,7 @@
         android:layout_marginEnd="0dp" />
 
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/control"
         android:layout_width="0dp"
         android:layout_height="112dp"
@@ -43,22 +43,84 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="1.0">
 
-        <Button
+        <!--<Button-->
+            <!--android:id="@+id/picture"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="@string/take_pictures" />-->
+
+        <ImageView
             android:id="@+id/picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/take_pictures" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/img_homepage_camera5"
+            tools:ignore="ContentDescription" />
 
-        <ImageButton
-            android:id="@+id/info"
-            style="@android:style/Widget.Material.Light.Button.Borderless"
+        <!--<ImageButton-->
+            <!--android:id="@+id/info"-->
+            <!--style="@android:style/Widget.Material.Light.Button.Borderless"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical|right"-->
+            <!--android:padding="20dp"-->
+            <!--android:src="@drawable/ic_action_info" />-->
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/home_custom_top_relative"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/Black4"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        >
+
+        <ImageView
+            android:id="@+id/camera_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:padding="20dp"
-            android:src="@drawable/ic_action_info" />
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/selector_btn_camera_close1" />
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/flash_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/selector_btn_flash_light" />
+
+        <ImageView
+            android:id="@+id/camera_square"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:padding="10dp"
+            android:src="@drawable/btn_camera_size2_n" />
+
+        <ImageView
+            android:id="@+id/camera_delay_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/btn_camera_timing_0" />
+
+        <ImageView
+            android:id="@+id/camera_frontback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/btn_camera_turn_n" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

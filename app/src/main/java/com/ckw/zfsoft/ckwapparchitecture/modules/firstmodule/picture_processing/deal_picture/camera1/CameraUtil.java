@@ -1,4 +1,4 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1;
 
 /**
  * Created by yue on 2015/8/13.

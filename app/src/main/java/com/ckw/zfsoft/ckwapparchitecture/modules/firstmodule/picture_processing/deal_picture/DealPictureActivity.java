@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseActivity;
-import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom.AppConstant;
-import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom.CameraUtil;
-import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom.ShowPicActivity;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1.AppConstant;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1.CameraUtil;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1.ShowPicActivity;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ToastUtils;
 
 import java.util.List;

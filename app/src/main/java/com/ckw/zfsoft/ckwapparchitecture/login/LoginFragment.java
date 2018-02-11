@@ -438,7 +438,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View,Pi
             showError(mUserName,"用户名不能为空");
             return false;
         }
-        return true;
+        if("ckw".equals(account)){
+            return true;
+        }
+        return false;
     }
 
     /**

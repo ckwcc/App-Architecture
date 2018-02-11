@@ -1,9 +1,14 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,16 +18,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
+import com.facebook.binaryresource.FileBinaryResource;
+import com.facebook.cache.common.SimpleCacheKey;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 
+import java.io.File;
 import java.util.List;
 
 import jp.wasabeef.fresco.processors.BlurPostprocessor;
@@ -33,7 +39,6 @@ import jp.wasabeef.fresco.processors.MaskPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.BrightnessFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.ContrastFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.InvertFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.KuawaharaFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.PixelationFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.SepiaFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.SketchFilterPostprocessor;
@@ -85,7 +90,7 @@ public class CustomProcessAdapter extends RecyclerView.Adapter<CustomProcessAdap
   }
 
   @Override public void onBindViewHolder(final ViewHolder holder, final int position) {
-    Context context = holder.itemView.getContext();
+    final Context context = holder.itemView.getContext();
     Postprocessor processor = null;
 
     holder.drawee.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);
@@ -178,10 +183,13 @@ public class CustomProcessAdapter extends RecyclerView.Adapter<CustomProcessAdap
                           .setCallerContext(mUri)
                           .build();
             mTargetView.setController(controllerTarget);
+
         }
       }
     });
   }
+
+
 
   @Override public int getItemCount() {
     return dataSet.size();

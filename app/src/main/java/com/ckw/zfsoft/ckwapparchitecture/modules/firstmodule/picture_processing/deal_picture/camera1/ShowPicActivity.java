@@ -1,4 +1,4 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1;
 
 import android.net.Uri;
 import android.os.Bundle;

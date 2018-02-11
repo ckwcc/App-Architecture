@@ -1,4 +1,4 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.camera1;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -441,6 +441,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
                         File.separator + System.currentTimeMillis() + ".jpeg";
 
                 BitmapUtils.saveJPGE_After(context, saveBitmap, img_path, 100);
+
+                //存入本地相册
+                BitmapUtils.saveImageToGallery(getApplicationContext(),saveBitmap);
 
                 if(!bitmap.isRecycled()){
                     bitmap.recycle();
