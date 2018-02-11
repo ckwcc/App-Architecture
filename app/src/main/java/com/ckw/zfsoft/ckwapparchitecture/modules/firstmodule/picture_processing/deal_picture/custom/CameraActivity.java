@@ -23,7 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ckw.zfsoft.ckwapparchitecture.R;
-import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.SystemUtils;
 import com.ckw.zfsoft.ckwapparchitecture.utils.ToastUtils;
 
 

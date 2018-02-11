@@ -1,4 +1,4 @@
-package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture;
+package com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.custom;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

@@ -65,6 +65,7 @@ public class ShowPicActivity extends AppCompatActivity {
         dataSet.add(CustomProcessAdapter.Type.NinePatchMask);
         dataSet.add(CustomProcessAdapter.Type.Pixel);
         dataSet.add(CustomProcessAdapter.Type.Vignette);
+        //不知道为什么，Kuawahara这种会导致程序奔溃
 //        dataSet.add(CustomProcessAdapter.Type.Kuawahara);
         dataSet.add(CustomProcessAdapter.Type.Brightness);
         dataSet.add(CustomProcessAdapter.Type.Swirl);

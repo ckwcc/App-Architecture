@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -51,6 +53,7 @@
         <activity android:name=".modules.firstmodule.picture_processing.deal_picture.DealPictureActivity" />
         <activity android:name=".modules.firstmodule.picture_processing.deal_picture.custom.ShowPicActivity" />
         <activity android:name=".modules.firstmodule.picture_processing.deal_picture.custom.CameraActivity" />
+        <activity android:name=".modules.firstmodule.camera2.NewCameraActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

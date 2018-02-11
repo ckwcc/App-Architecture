@@ -22,8 +22,6 @@ import android.media.MediaScannerConnection;
 import android.util.Log;
 import android.view.View;
 
-import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.deal_picture.SystemUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;

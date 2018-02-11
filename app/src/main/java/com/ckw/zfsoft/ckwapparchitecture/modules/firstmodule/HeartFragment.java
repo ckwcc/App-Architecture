@@ -24,6 +24,7 @@ import com.ckw.zfsoft.ckwapparchitecture.R;
 import com.ckw.zfsoft.ckwapparchitecture.base.BaseFragment;
 import com.ckw.zfsoft.ckwapparchitecture.di.ActivityScoped;
 import com.ckw.zfsoft.ckwapparchitecture.eventbus.NightMessageEvent;
+import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.camera2.NewCameraActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.phone.CallPhoneActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.photoview.PhotoViewActivity;
 import com.ckw.zfsoft.ckwapparchitecture.modules.firstmodule.picture_processing.PictureProcessActivity;
@@ -164,6 +165,9 @@ public class HeartFragment extends BaseFragment {
                     case 5:
                         ActivityUtils.startActivity(getActivity(), DealPictureActivity.class);
                         break;
+                    case 6:
+                        ActivityUtils.startActivity(getActivity(), NewCameraActivity.class);
+                        break;
 
 
                     default:
@@ -186,7 +190,8 @@ public class HeartFragment extends BaseFragment {
         mData.add("PhotoView");
         mData.add("图片美颜");
         mData.add("相机处理");
-        for (int i = 0; i < 5; i++) {
+        mData.add("Camera2使用");
+        for (int i = 0; i < 4; i++) {
             mData.add("未完待续");
         }
         mAdapter = new DiplomaAdapter(getContext());
